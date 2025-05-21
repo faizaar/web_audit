@@ -48,7 +48,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('view/audit') ?>">
+        <a class="nav-link text-dark" href="<?= base_url('auditor/audit') ?>">
           <i class="material-symbols-rounded opacity-5">fact_check</i>
           <span class="nav-link-text ms-1">Audit</span>
         </a>

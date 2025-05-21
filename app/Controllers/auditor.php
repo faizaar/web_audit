@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Model_alatauditor;
+use App\Models\Model_auditauditor;
 
 class auditor extends BaseController
 { 
@@ -23,6 +24,18 @@ class auditor extends BaseController
         echo view('auditor/layout/auditor_header');
         echo view('auditor/layout/auditor_nav');
         echo view('auditor/alat/view_alat',$data);
+        echo view('auditor/layout/auditor_footer');
+    }
+
+    public function view_audit()
+    {
+        $mb = new model_auditauditor();
+        $datamb = $mb->tampilaudit();
+        $data = array('dataMb'=> $datamb,); 
+
+        echo view('auditor/layout/auditor_header');
+        echo view('auditor/layout/auditor_nav');
+        echo view('auditor/audit/view_audit',$data);
         echo view('auditor/layout/auditor_footer');
     }
 }

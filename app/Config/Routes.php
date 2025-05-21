@@ -9,7 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::auditee');
 
 
-$routes->get('auditor', 'Home::auditor');
+// $routes->get('auditor', 'Home::auditor');
 
 
 $routes->get('superadmin', 'Home::superadmin');
@@ -29,3 +29,4 @@ $routes->get('view/adminauditee','auditee::view_auditee');
 
 
 // Auditor- Faiza Fina
+$routes->get('auditor', 'auditor::view_auditor');

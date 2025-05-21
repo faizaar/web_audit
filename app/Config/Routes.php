@@ -32,3 +32,5 @@ $routes->get('view/adminauditee','auditee::view_auditee');
 $routes->get('auditor', 'auditor::view_auditor');
 $routes->get('auditor/alat', 'auditor::view_alat');
 $routes->get('auditor/audit', 'auditor::view_audit');
+$routes->get('auditor/risiko', 'auditor::view_risiko');
+$routes->get('auditor/laporan_hasil', 'auditor::view_tampilan_hasil');

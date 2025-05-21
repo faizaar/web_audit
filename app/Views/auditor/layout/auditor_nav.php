@@ -72,13 +72,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('view/laporan_hasil_audit') ?>">
+        <a class="nav-link text-dark" href="<?= base_url('auditor/laporan_hasil') ?>">
           <i class="material-symbols-rounded opacity-5">analytics</i>
           <span class="nav-link-text ms-1">Laporan Audit</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('view/risiko') ?>">
+        <a class="nav-link text-dark" href="<?= base_url('auditor/risiko') ?>">
           <i class="material-symbols-rounded opacity-5">warning</i>
           <span class="nav-link-text ms-1">Risiko</span>
         </a>

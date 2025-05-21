@@ -3,7 +3,10 @@
 namespace App\Controllers;
 
 use App\Models\Model_alatauditor;
+use App\Models\model_asetauditor;
 use App\Models\Model_auditauditor;
+use App\Models\model_dokumenauditor;
+use App\Models\model_komponenauditor;
 use App\Models\Model_risiko;
 use App\Models\Model_laporan_hasil;
 
@@ -63,6 +66,42 @@ class auditor extends BaseController
         echo view('auditor/layout/auditor_header');
         echo view('auditor/layout/auditor_nav');
         echo view('auditor/Laporan_hasil/view_laporan_hasil',$data);
+        echo view('auditor/layout/auditor_footer');
+    }
+
+    public function view_dokumen()
+    {
+        $mb = new model_dokumenauditor();
+        $datamb = $mb->tampildokumen();
+        $data = array('dataMb'=> $datamb,); 
+
+        echo view('auditor/layout/auditor_header');
+        echo view('auditor/layout/auditor_nav');
+        echo view('auditor/dokumen/view_dokumen',$data);
+        echo view('auditor/layout/auditor_footer');
+    }
+
+    public function view_aset()
+    {
+        $mb = new model_asetauditor();
+        $datamb = $mb->tampilaset();
+        $data = array('dataMb'=> $datamb,); 
+
+        echo view('auditor/layout/auditor_header');
+        echo view('auditor/layout/auditor_nav');
+        echo view('auditor/aset/view_aset',$data);
+        echo view('auditor/layout/auditor_footer');
+    }
+
+    public function view_komponen()
+    {
+        $mb = new model_komponenauditor();
+        $datamb = $mb->tampilkomponen();
+        $data = array('dataMb'=> $datamb,); 
+
+        echo view('auditor/layout/auditor_header');
+        echo view('auditor/layout/auditor_nav');
+        echo view('auditor/komponen_penilaian/view_komponenpenilaian',$data);
         echo view('auditor/layout/auditor_footer');
     }
 }

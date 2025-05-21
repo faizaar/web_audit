@@ -18,18 +18,6 @@
 
       <!-- Menu Data Tabel -->
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('view/akun_auditee') ?>">
-          <i class="material-symbols-rounded opacity-5">person</i>
-          <span class="nav-link-text ms-1">Akun Auditee</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('view/akun_auditor') ?>">
-          <i class="material-symbols-rounded opacity-5">badge</i>
-          <span class="nav-link-text ms-1">Akun Auditor</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link text-dark" href="<?= base_url('auditor/alat') ?>">
           <i class="material-symbols-rounded opacity-5">build</i>
           <span class="nav-link-text ms-1">Alat</span>
@@ -42,7 +30,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('view/aset') ?>">
+        <a class="nav-link text-dark" href="<?= base_url('auditor/aset') ?>">
           <i class="material-symbols-rounded opacity-5">category</i>
           <span class="nav-link-text ms-1">Aset</span>
         </a>
@@ -54,19 +42,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('view/dokumen') ?>">
+        <a class="nav-link text-dark" href="<?= base_url('auditor/dokumen') ?>">
           <i class="material-symbols-rounded opacity-5">description</i>
           <span class="nav-link-text ms-1">Dokumen</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('view/jadwal') ?>">
-          <i class="material-symbols-rounded opacity-5">event</i>
-          <span class="nav-link-text ms-1">Jadwal</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('view/komponen_penilaian') ?>">
+        <a class="nav-link text-dark" href="<?= base_url('auditor/komponen') ?>">
           <i class="material-symbols-rounded opacity-5">checklist</i>
           <span class="nav-link-text ms-1">Komponen Penilaian</span>
         </a>

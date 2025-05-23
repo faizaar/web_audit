@@ -14,6 +14,12 @@ $routes->get('/', 'Home::auditee');
 
 $routes->get('superadmin', 'Home::superadmin');
 $routes->get('view/adminauditee','auditee::view_auditee');
+$routes->get('auditee/login', 'auditee::form_login');
+// $routes->get('auditee/form_login', 'auditee::form_login');
+$routes->post('auditee/process_login', 'auditee::login');
+$routes->get('auditee/dashboard', 'auditee::view_auditee');
+$routes->get('auditee/logout', 'auditee::logout');
+$routes->get('auditee/jadwal', 'auditee::view_jadwal');
 
 
 

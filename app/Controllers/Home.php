@@ -6,9 +6,9 @@ class Home extends BaseController
 {
     public function auditee()
     {
-        echo view('auditee/layout/header');
-        echo view('auditee/layout/main_content');
-        echo view('auditee/layout/footer');
+        echo view('layout_auditee/header');
+        echo view('layout_auditee/main_content');
+        echo view('layout_auditee/footer');
     }
 
     public function auditor()

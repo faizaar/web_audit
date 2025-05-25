@@ -26,6 +26,11 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../../css/style.css" rel="stylesheet">
 
+    <!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </head>
 
 <body>
@@ -48,8 +53,8 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Audit</a>
                         <div class="dropdown-menu m-0">
+                            <a href="<?= base_url('auditee/profile'); ?>" class="dropdown-item">Profile</a>
                             <a href="<?= base_url('auditee/jadwal'); ?>" class="dropdown-item">Jadwal Audit</a>
-                            <a href="feature.html" class="dropdown-item">Upload Dokumen</a>
                             <a href="team.html" class="dropdown-item">Tanggapan Audit</a>
                             <a href="testimonial.html" class="dropdown-item">Kosong</a>
                         </div>
@@ -59,7 +64,7 @@
                         <div class="dropdown-menu m-0">
                             <a href="detail.html" class="dropdown-item">Data Aset</a>
                             <a href="feature.html" class="dropdown-item">Risiko</a>
-                            <a href="team.html" class="dropdown-item">Data Aset</a>
+                            <a href="<?= base_url('auditee/dokumen'); ?>" class="dropdown-item">Data Dokumen</a>
                             <a href="testimonial.html" class="dropdown-item">Kosong</a>
                         </div>
                     </div>
@@ -70,7 +75,3 @@
         </nav>
     </div>
     <!-- Navbar End -->
-
-
-
-    <!-- Header End -->

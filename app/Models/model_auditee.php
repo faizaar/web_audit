@@ -26,4 +26,9 @@ class model_auditee extends Model
     {
         return $this->where('NIP', $nip)->first();
     }
+
+    public function getProfile($id)
+    {
+        return $this->where('id_auditee', $id)->first();
+    }
 }

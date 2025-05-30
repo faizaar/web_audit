@@ -9,51 +9,39 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="../../img/favicon.ico" rel="icon">
+    <link href="../..img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../../css/style.css" rel="stylesheet">
-
-    <!-- Bootstrap 5 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
 </head>
 
 <body>
+
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
             <a href="index.html" class="navbar-brand ml-lg-3">
-                <h1 class="m-0 text-uppercase" style="color:#007bff;">
-                    <i class="fa fa-book-reader mr-3"></i>Audit
-                </h1>
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-shield-alt mr-3"></i>Audit</h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <!-- <a href="<?= base_url('auditee/dashboard'); ?>" class="nav-item nav-link">Login</a> -->
-                    <!-- <a href="course.html" class="nav-item nav-link">Courses</a> -->
+                    <a href="<?= base_url('auditee/dashboard'); ?>" class="nav-item nav-link active">Home</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Audit</a>
                         <div class="dropdown-menu m-0">
-                            <a href="<?= base_url('auditee/profile'); ?>" class="dropdown-item">Profile</a>
                             <a href="<?= base_url('auditee/jadwal'); ?>" class="dropdown-item">Jadwal Audit</a>
                             <a href="team.html" class="dropdown-item">Tanggapan Audit</a>
                             <a href="testimonial.html" class="dropdown-item">Kosong</a>
@@ -62,15 +50,21 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Data</a>
                         <div class="dropdown-menu m-0">
-                            <a href="detail.html" class="dropdown-item">Data Aset</a>
-                            <a href="feature.html" class="dropdown-item">Risiko</a>
+                            <a href="<?= base_url('auditee/alat'); ?>" class="dropdown-item">Data Alat</a>
+                            <a href="<?= base_url('auditee/aset'); ?>" class="dropdown-item">Data Aset</a>
+                            <a href="<?= base_url('auditee/risiko'); ?>" class="dropdown-item">Data Risiko</a>
                             <a href="<?= base_url('auditee/dokumen'); ?>" class="dropdown-item">Data Dokumen</a>
-                            <a href="testimonial.html" class="dropdown-item">Kosong</a>
+                            <a href="<?= base_url('auditee/kosong'); ?>" class="dropdown-item">Kosong</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Kosong</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Akun</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="<?= base_url('auditee/profile'); ?>" class="dropdown-item">Profile</a>
+                            <a href="<?= base_url('auditee/logout'); ?>" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
                 </div>
-                <!-- <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a> -->
             </div>
         </nav>
     </div>

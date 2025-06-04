@@ -40,6 +40,13 @@
                 <div class="navbar-nav mx-auto py-0">
                     <a href="<?= base_url('auditee/dashboard'); ?>" class="nav-item nav-link active">Home</a>
                     <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Akun</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="<?= base_url('auditee/profile'); ?>" class="dropdown-item">Profile</a>
+                            <a href="<?= base_url('auditee/logout'); ?>" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Audit</a>
                         <div class="dropdown-menu m-0">
                             <a href="<?= base_url('auditee/jadwal'); ?>" class="dropdown-item">Jadwal Audit</a>
@@ -52,16 +59,7 @@
                         <div class="dropdown-menu m-0">
                             <a href="<?= base_url('auditee/alat'); ?>" class="dropdown-item">Data Alat</a>
                             <a href="<?= base_url('auditee/aset'); ?>" class="dropdown-item">Data Aset</a>
-                            <a href="<?= base_url('auditee/risiko'); ?>" class="dropdown-item">Data Risiko</a>
                             <a href="<?= base_url('auditee/dokumen'); ?>" class="dropdown-item">Data Dokumen</a>
-                            <a href="<?= base_url('auditee/kosong'); ?>" class="dropdown-item">Kosong</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Akun</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="<?= base_url('auditee/profile'); ?>" class="dropdown-item">Profile</a>
-                            <a href="<?= base_url('auditee/logout'); ?>" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>

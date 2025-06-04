@@ -6,7 +6,7 @@ class model_dokumenauditor extends Model
 {
     protected $table = 'dokumen';
     protected $primaryKey = 'id_dokumen';
-    protected $allowedFields = ['kode_dokumen','jenis', 'nama', 'deskripsi', 'id_auditee'];
+    protected $allowedFields = ['kode_dokumen', 'jenis', 'nama', 'deskripsi', 'file', 'id_auditee'];
     protected $returnType = 'array';
 
     function __construct()
@@ -41,6 +41,18 @@ class model_dokumenauditor extends Model
         return $this->delete($id_dokumen);
     }
 
+    // public function countByStatus($status)
+    // {
+    //     return $this->where('id_auditee', session()->get('id_auditee'))
+    //         ->where('status', $status)
+    //         ->countAllResults();
+    // }
+
+    public function countAllDokumen()
+    {
+        return $this->where('id_auditee', session()->get('id_auditee'))
+            ->countAllResults();
+    }
 
 }
 

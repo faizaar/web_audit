@@ -29,13 +29,14 @@
               <th>Jenis</th>
               <th>Nama</th>
               <th>Deskripsi</th>
-              <th class="text-center text-nowrap"  style="width: 100px;">Aksi</th>
+              <th>File</th>
+              <th class="text-center text-nowrap" style="width: 100px;">Aksi</th>
             </tr>
           </thead>
           <tbody>
             <?php if (empty($konten)): ?>
               <tr>
-                <td colspan="5" class="text-center text-muted">Belum ada data.</td>
+                <td colspan="6" class="text-center text-muted">Belum ada data.</td>
               </tr>
             <?php else: ?>
               <?php foreach ($konten as $row): ?>
@@ -44,6 +45,15 @@
                   <td><?= esc($row['jenis']) ?></td>
                   <td><?= esc($row['nama']) ?></td>
                   <td><?= esc($row['deskripsi']) ?></td>
+                  <td><?php if (!empty($row['file'])): ?>
+                      <a href="<?= base_url('uploads/dokumen/' . $row['file']) ?>" target="_blank"
+                        class="btn btn-light btn-sm">
+                        Lihat File
+                      </a>
+                    <?php else: ?>
+                      <span class="text-muted">Tidak ada file</span>
+                    <?php endif; ?>
+                  </td>
                   <td class="text-center">
                     <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal"
                       data-bs-target="#editModal<?= $row['id_dokumen'] ?>">
@@ -60,11 +70,12 @@
                 <div class="modal fade" id="editModal<?= $row['id_dokumen'] ?>" tabindex="-1"
                   aria-labelledby="editModalLabel<?= $row['id_dokumen'] ?>" aria-hidden="true">
                   <div class="modal-dialog">
-                    <form method="post" action="<?= base_url('auditee/update_dokumen') ?>">
+                    <form method="post" action="<?= base_url('auditee/update_dokumen') ?>" enctype="multipart/form-data">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title">Edit Dokumen</h5>
-                          <button type="button" class="btn avatar-sm" data-bs-dismiss="modal" aria-label="Tutup">&times;</button>
+                          <button type="button" class="btn avatar-sm" data-bs-dismiss="modal"
+                            aria-label="Tutup">&times;</button>
                         </div>
                         <div class="modal-body">
                           <input type="hidden" name="id_dokumen" value="<?= $row['id_dokumen'] ?>">
@@ -86,6 +97,11 @@
                             <textarea name="deskripsi" class="form-control"
                               required><?= esc($row['deskripsi']) ?></textarea>
                           </div>
+                          <div class="'mb-3">
+                            <Label for="">File</Label>
+                            <input type="file" name="file" class="form-control" required><?= esc($row['file']) ?>
+                            <small class="text-muted">Biarkan kosong jika tidak ingin mengganti file</small>
+                          </div>
                         </div>
                         <div class="modal-footer">
                           <button type="submit" class="btn btn-success btn-sm">Simpan Perubahan</button>
@@ -106,7 +122,7 @@
 <!-- Modal Tambah -->
 <div class="modal fade" id="kontenModal" tabindex="-1" aria-labelledby="kontenModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form method="post" action="<?= base_url('auditee/save_dokumen') ?>">
+    <form method="post" action="<?= base_url('auditee/save_dokumen') ?>" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Tambah Dokumen</h5>
@@ -130,6 +146,10 @@
           <div class="mb-3">
             <label>Deskripsi</label>
             <textarea name="deskripsi" class="form-control" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="">File</label>
+            <input type="file" name="file" class="form-control" required>
           </div>
         </div>
         <div class="modal-footer">

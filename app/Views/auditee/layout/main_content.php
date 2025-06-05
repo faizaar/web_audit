@@ -9,48 +9,43 @@
 <!-- Card Info Start -->
 <div class="container py-5">
     <div class="row g-4">
-        <!-- Card 1: Dokumen Diunggah -->
+        <!-- Dokumen Diunggah -->
         <div class="col-md-3">
-            <div class="card text-white bg-success shadow h-100">
-                <div class="card-body text-center">
-                    <h1 class="card-title mb-0" data-toggle="counter-up"><?= $total_dokumen ?></h1>
-                    <p class="text-uppercase mt-2">Dokumen<span class="d-block">Diunggah</span></p>
-                </div>
+            <div class="stat-box">
+                <div class="stat-icon"><i class="fas fa-file-upload fa-lg"></i></div>
+                <div class="stat-value"><?= $total_dokumen ?></div>
+                <div class="stat-label">Dokumen<br>Diunggah</div>
             </div>
         </div>
 
-        <!-- Card 2: Diterima -->
+        <!-- Status Diterima -->
         <div class="col-md-3">
-            <div class="card text-white bg-primary shadow h-100">
-                <div class="card-body text-center">
-                    <h1 class="card-title mb-0" data-toggle="counter-up">10</h1>
-                    <p class="text-uppercase mt-2">Status<span class="d-block">Diterima</span></p>
-                </div>
+            <div class="stat-box">
+                <div class="stat-icon"><i class="fas fa-check-circle fa-lg"></i></div>
+                <div class="stat-value">10</div>
+                <div class="stat-label">Status<br>Diterima</div>
             </div>
         </div>
 
-        <!-- Card 3: Menunggu Review -->
+        <!-- Menunggu Review -->
         <div class="col-md-3">
-            <div class="card text-white bg-secondary shadow h-100">
-                <div class="card-body text-center">
-                    <h1 class="card-title mb-0" data-toggle="counter-up">2</h1>
-                    <p class="text-uppercase mt-2">Menunggu<span class="d-block">Review</span></p>
-                </div>
+            <div class="stat-box">
+                <div class="stat-icon"><i class="fas fa-clock fa-lg"></i></div>
+                <div class="stat-value">2</div>
+                <div class="stat-label">Menunggu<br>Review</div>
             </div>
         </div>
 
-        <!-- Card 4: Revisi -->
+        <!-- Perlu Revisi -->
         <div class="col-md-3">
-            <div class="card text-white bg-warning shadow h-100">
-                <div class="card-body text-center">
-                    <h1 class="card-title mb-0" data-toggle="counter-up">1</h1>
-                    <p class="text-uppercase mt-2">Perlu<span class="d-block">Revisi</span></p>
-                </div>
+            <div class="stat-box">
+                <div class="stat-icon"><i class="fas fa-edit fa-lg"></i></div>
+                <div class="stat-value">1</div>
+                <div class="stat-label">Perlu<br>Revisi</div>
             </div>
         </div>
     </div>
 </div>
-<!-- Card Info End -->
 
 
 <!-- Feature Start -->

@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link rel="icon" href="<?= base_url('assets/img/logo-audit-32x32.png') ?>" type="image/png">
+    <link rel="icon" href="<?= base_url('assets/img/logo-audit.png') ?>" type="image/png">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">

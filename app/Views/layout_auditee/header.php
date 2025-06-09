@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
                     <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="<?= base_url('auditee/login'); ?>" class="nav-item nav-link">Login</a>
+                    <a href="<?= base_url('login'); ?>" class="nav-item nav-link">Login</a>
                     <?php if (session()->get('id_auditee')): ?>
                         <!-- Dropdown Audit -->
                         <div class="nav-item dropdown">

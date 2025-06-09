@@ -9,11 +9,6 @@ class model_dokumenauditor extends Model
     protected $allowedFields = ['kode_dokumen', 'jenis', 'nama', 'deskripsi', 'file', 'id_auditee'];
     protected $returnType = 'array';
 
-    function __construct()
-    {
-        $this->db = db_connect();
-    }
-
     function tampildokumen()
     {
         $dataquery = $this->db->query("select * from dokumen");

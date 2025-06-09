@@ -6,10 +6,6 @@ class model_komponenauditor extends Model
 {
     protected $table = 'komponen_penilaian';
  
-    function __construct()
-    {
-        $this->db = db_connect();
-    }
 
     function tampilkomponen()
     {

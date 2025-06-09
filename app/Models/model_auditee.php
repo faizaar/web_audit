@@ -6,7 +6,7 @@ class model_auditee extends Model
 {
     protected $table = 'akun_auditee';
     protected $primaryKey = 'id_auditee';
-    protected $allowedFields = ['NIP', 'Jabatan', 'auditee', 'kategori', 'kegiatan'];
+    protected $allowedFields = ['NIP', 'Jabatan', 'auditee', 'kategori', 'kegiatan', 'id_user'];
 
     protected $useTimestamps = false;
 

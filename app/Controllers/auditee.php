@@ -27,37 +27,6 @@ class auditee extends BaseController
         echo view('auditee/layout/footer');
     }
 
-    public function form_login()
-    {
-        echo view('auditee/login/form_login');
-    }
-
-    public function login()
-    {
-        $nip = $this->request->getPost('nip');
-        $model = new Model_auditee();
-        $auditee = $model->cek_login($nip);
-
-        if ($auditee) {
-            // Simpan data di session
-            session()->set([
-                'id_auditee' => $auditee['id_auditee'],
-                'NIP' => $auditee['NIP'],
-                'auditee' => $auditee['auditee'],
-                'logged_in' => true
-            ]);
-            return redirect()->to(base_url('auditee/dashboard')); // Ganti dengan halaman utama auditee
-        } else {
-            return redirect()->back()->with('error', 'NIP tidak ditemukan!');
-        }
-    }
-
-    public function logout()
-    {
-        session()->destroy();
-        return redirect()->to(base_url('/'))->with('message', 'Berhasil logout.');
-    }
-
 
     public function view_jadwal()
     {

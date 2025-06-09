@@ -20,9 +20,11 @@ $routes->get('superadmin', 'Home::superadmin');
 // AUDITEE (Fito)
 // ====================
 // Auth
-$routes->get('auditee/login', 'auditee::form_login');
-$routes->post('auditee/process_login', 'auditee::login');
-$routes->get('auditee/logout', 'auditee::logout');
+$routes->get('login', 'Login::form_login');
+$routes->post('login/process', 'Login::process');
+$routes->get('auditee/logout', 'Login::logout');
+$routes->get('auditor/logout', 'auditor::logout');
+
 
 // Dashboard dan View
 $routes->get('auditee/dashboard', 'auditee::view_auditee');

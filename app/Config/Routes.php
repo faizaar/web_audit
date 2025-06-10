@@ -15,6 +15,17 @@ $routes->get('/', 'Home::auditee');
 // SUPERADMIN (Putri)
 // ====================
 $routes->get('superadmin', 'Home::superadmin');
+// Auditor - Superadmin Role
+$routes->get('superadmin/auditor', 'admin_controller::index_auditor');                         // Menampilkan semua auditor
+$routes->post('superadmin/auditor/save', 'admin_controller::save_auditor');                  // Simpan auditor baru
+$routes->post('superadmin/auditor/update/(:num)', 'admin_controller::update_auditor/$1');    // Update auditor
+$routes->get('superadmin/auditor/delete/(:num)', 'admin_controller::delete_auditor/$1');     // Hapus auditor
+// Auditee - Superadmin Role
+$routes->get('superadmin/auditee', 'admin_controller::index_auditee');                        // Menampilkan semua auditee
+$routes->post('superadmin/auditee/save', 'admin_controller::save_auditee');                 // Simpan auditee baru
+$routes->post('superadmin/auditee/update/(:num)', 'admin_controller::update_auditee/$1');   // Update auditee
+$routes->get('superadmin/auditee/delete/(:num)', 'admin_controller::delete_auditee/$1');    // Hapus auditee
+
 
 // ====================
 // AUDITEE (Fito)

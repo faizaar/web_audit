@@ -15,51 +15,24 @@ class auditee extends BaseController
     {
         $id = session()->get('id_auditee');
         $model = new model_auditee();
+        $dokumen = new model_dokumenauditor();
         $id = session()->get('auditee_id'); // Ambil dari session
-        $data['auditee'] = $model->getProfile($id); // Ambil data auditee
+        $data = [
+            'auditee' => $model->getProfile($id), // Ambil data auditee
+            'total_dokumen' => $dokumen->countAllDokumen(),
+        ];
 
         echo view('auditee/layout/header');
         echo view('auditee/layout/main_content', $data);
         echo view('auditee/layout/footer');
     }
 
-    public function form_login()
-    {
-        echo view('auditee/login/form_login');
-    }
-
-    public function login()
-    {
-        $nip = $this->request->getPost('nip');
-        $model = new Model_auditee();
-        $auditee = $model->cek_login($nip);
-
-        if ($auditee) {
-            // Simpan data di session
-            session()->set([
-                'id_auditee' => $auditee['id_auditee'],
-                'NIP' => $auditee['NIP'],
-                'auditee' => $auditee['auditee'],
-                'logged_in' => true
-            ]);
-            return redirect()->to(base_url('auditee/dashboard')); // Ganti dengan halaman utama auditee
-        } else {
-            return redirect()->back()->with('error', 'NIP tidak ditemukan!');
-        }
-    }
-
-    public function logout()
-    {
-        session()->destroy();
-        return redirect()->to(base_url('/'))->with('message', 'Berhasil logout.');
-    }
-
 
     public function view_jadwal()
     {
+        $id = session()->get('id_auditee');
         $mb = new model_jadwalauditor();
-        $datamb = $mb->tampiljadwal();
-        $data = array('dataMb' => $datamb, );
+        $data['dataMb'] = $mb->tampilJadwal_byid($id);
 
         echo view('auditee/layout/header');
         echo view('auditee/jadwal/view_jadwal', $data);
@@ -104,20 +77,28 @@ class auditee extends BaseController
         echo view('auditee/layout/footer');
     }
 
-
     public function save_dokumen()
     {
-        $model = new model_dokumenauditor();
-        $model->save([
-            'id_auditee' => session()->get('id_auditee'),
-            'kode_dokumen' => $this->request->getPost('kode_dokumen'),
-            'jenis' => $this->request->getPost('jenis'),
-            'nama' => $this->request->getPost('nama'),
-            'deskripsi' => $this->request->getPost('deskripsi'),
-        ]);
+        $file = $this->request->getFile('file');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getClientName();
+            $file->move('uploads/dokumen', $newName); // folder tujuan upload
+
+            $model = new model_dokumenauditor();
+            $model->save([
+                'id_auditee' => session()->get('id_auditee'),
+                'kode_dokumen' => $this->request->getPost('kode_dokumen'),
+                'jenis' => $this->request->getPost('jenis'),
+                'nama' => $this->request->getPost('nama'),
+                'deskripsi' => $this->request->getPost('deskripsi'),
+                'file' => $newName // Simpan nama file saja
+            ]);
+        }
 
         return redirect()->to(base_url('auditee/dokumen'));
     }
+
 
 
     public function edit_dokumen($id_dokumen)
@@ -139,6 +120,13 @@ class auditee extends BaseController
             'nama' => $this->request->getPost('nama'),
             'deskripsi' => $this->request->getPost('deskripsi'),
         ];
+
+        $file = $this->request->getFile('file');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $file->move('uploads/dokumen', $newName);
+            $data['file'] = $newName; // tambahkan field file baru
+        }
 
         $model = new model_dokumenauditor();
         $model->update($id, $data);

@@ -3,14 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>WEB - AUDIT</title>
+    <title>Dashboard WEB - AUDIT</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="../..img/favicon.ico" rel="icon">
-    <link rel="icon" href="<?= base_url('img/favicon.png') ?>" type="image/png">
+    <link rel="icon" href="<?= base_url('assets/img/logo-audit.png') ?>" type="image/png">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -41,7 +40,7 @@
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
                     <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="<?= base_url('auditee/login'); ?>" class="nav-item nav-link">Login</a>
+                    <a href="<?= base_url('login'); ?>" class="nav-item nav-link">Login</a>
                     <?php if (session()->get('id_auditee')): ?>
                         <!-- Dropdown Audit -->
                         <div class="nav-item dropdown">
@@ -58,9 +57,7 @@
                             <div class="dropdown-menu m-0">
                                 <a href="<?= base_url('auditee/alat'); ?>" class="dropdown-item">Data Alat</a>
                                 <a href="<?= base_url('auditee/aset'); ?>" class="dropdown-item">Data Aset</a>
-                                <a href="<?= base_url('auditee/risiko'); ?>" class="dropdown-item">Data Risiko</a>
                                 <a href="<?= base_url('auditee/dokumen'); ?>" class="dropdown-item">Data Dokumen</a>
-                                <a href="<?= base_url('auditee/kosong'); ?>" class="dropdown-item">Kosong</a>
                             </div>
                         </div>
                     <?php else: ?>
@@ -79,14 +76,10 @@
                             <div class="dropdown-menu m-0">
                                 <a href="#" class="dropdown-item" onclick="alertLogin(); return false;">Data Alat</a>
                                 <a href="#" class="dropdown-item" onclick="alertLogin(); return false;">Data Aset</a>
-                                <a href="#" class="dropdown-item" onclick="alertLogin(); return false;">Data Risiko</a>
                                 <a href="#" class="dropdown-item" onclick="alertLogin(); return false;">Data Dokumen</a>
-                                <a href="#" class="dropdown-item" onclick="alertLogin(); return false;">Kosong</a>
                             </div>
                         </div>
                     <?php endif; ?>
-
-                    <a href="contact.html" class="nav-item nav-link">Kosong</a>
                 </div>
             </div>
         </nav>

@@ -19,11 +19,11 @@
                         <tbody>
                             <?php foreach ($dataMb as $row): ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($row->id_kegiatan) ?></td>
-                                    <td><?= htmlspecialchars($row->nama_kegiatan) ?></td>
-                                    <td><?= htmlspecialchars($row->hari_tanggal) ?></td>
-                                    <td><?= htmlspecialchars($row->jam) ?></td>
-                                    <td><?= htmlspecialchars($row->target_luaran) ?></td>
+                                    <td><?= htmlspecialchars($row['id_kegiatan']) ?></td>
+                                    <td><?= htmlspecialchars($row['nama_kegiatan']) ?></td>
+                                    <td><?= htmlspecialchars($row['hari_tanggal']) ?></td>
+                                    <td><?= htmlspecialchars($row['jam']) ?></td>
+                                    <td><?= htmlspecialchars($row['target_luaran']) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

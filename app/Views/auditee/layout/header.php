@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="../..img/favicon.ico" rel="icon">
+    <link rel="icon" href="<?= base_url('assets/img/logo-audit.png') ?>" type="image/png">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -23,6 +23,8 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../../css/style.css" rel="stylesheet">
+    <!-- Tambahkan di bagian <head> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -40,6 +42,13 @@
                 <div class="navbar-nav mx-auto py-0">
                     <a href="<?= base_url('auditee/dashboard'); ?>" class="nav-item nav-link active">Home</a>
                     <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Akun</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="<?= base_url('auditee/profile'); ?>" class="dropdown-item">Profile</a>
+                            <a href="<?= base_url('auditee/logout'); ?>" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Audit</a>
                         <div class="dropdown-menu m-0">
                             <a href="<?= base_url('auditee/jadwal'); ?>" class="dropdown-item">Jadwal Audit</a>
@@ -52,16 +61,7 @@
                         <div class="dropdown-menu m-0">
                             <a href="<?= base_url('auditee/alat'); ?>" class="dropdown-item">Data Alat</a>
                             <a href="<?= base_url('auditee/aset'); ?>" class="dropdown-item">Data Aset</a>
-                            <a href="<?= base_url('auditee/risiko'); ?>" class="dropdown-item">Data Risiko</a>
                             <a href="<?= base_url('auditee/dokumen'); ?>" class="dropdown-item">Data Dokumen</a>
-                            <a href="<?= base_url('auditee/kosong'); ?>" class="dropdown-item">Kosong</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Akun</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="<?= base_url('auditee/profile'); ?>" class="dropdown-item">Profile</a>
-                            <a href="<?= base_url('auditee/logout'); ?>" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>

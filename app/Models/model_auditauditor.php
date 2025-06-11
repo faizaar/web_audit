@@ -4,18 +4,21 @@ use CodeIgniter\Model;
 
 class model_auditauditor extends Model
 {
-    protected $table = 'audit';
- 
-    function __construct()
+    protected $table      = 'audit';
+    protected $primaryKey = 'kode_audit'; // sesuaikan jika bukan
+    protected $returnType = 'array';
+    protected $allowedFields = ['kode_audit', 'nama_kegiatan_audit']; // sesuaikan dengan kolom tabel audit
+
+    public function __construct()
     {
-        $this->db = db_connect();
+        parent::__construct(); // penting!
     }
 
-    function tampilaudit()
+    // Ambil semua data audit
+    public function tampilaudit()
     {
-        $dataquery=$this->db->query("select * from audit");
-        return $dataquery->getResult();
+        return $this->findAll(); // sudah otomatis sesuai returnType (array)
     }
-
 }
+
 

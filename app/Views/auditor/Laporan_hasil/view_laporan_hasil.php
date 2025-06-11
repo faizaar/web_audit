@@ -117,52 +117,195 @@
         </div>
       </div>
     </nav>
-<!-- Table Card Laporan Hasil Audit -->
-<div class="card m-3">
-  <div class="card-header pb-0">
-    <h6>Laporan Hasil Audit</h6>
+< <!-- TOMBOL TAMBAH -->
+  <div class="d-flex justify-content-end m-3">
+    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambahLaporan">
+      <i class="material-symbols-rounded align-middle">add</i> Tambah Data Laporan
+    </button>
   </div>
-  <div class="card-body px-0 pb-2">
-    <div class="table-responsive p-3" style="max-height: 500px; overflow-y: auto;">
-      <table class="table table-hover table-bordered align-items-start mb-0">
-        <thead class="bg-light">
-          <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Kode Audit</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Temuan</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Rekomendasi</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Rencana</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Target Realisasi</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Rencana Pelaksana</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Tanggal</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Nama Jabatan</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php if (!empty($dataMb)): ?>
-          <?php foreach ($dataMb as $laporan): ?>
-          <tr>
-            <td><p class="text-xs font-weight-bold mb-0"><?= $laporan->kode_audit ?></p></td>
-            <td style="white-space: normal;"><p class="text-xs text-secondary mb-0"><?= $laporan->temuan ?></p></td>
-            <td style="white-space: normal;"><p class="text-xs text-secondary mb-0"><?= $laporan->rekomendasi ?></p></td>
-            <td style="white-space: normal;"><p class="text-xs text-secondary mb-0"><?= $laporan->rencana ?></p></td>
-            <td><p class="text-xs text-secondary mb-0"><?= $laporan->target_realisasi ?></p></td>
-            <td style="white-space: normal;"><p class="text-xs text-secondary mb-0"><?= $laporan->rencana_pelaksana ?></p></td>
-            <td><p class="text-xs text-secondary mb-0"><?= $laporan->tanggal ?></p></td>
-            <td style="white-space: normal;"><p class="text-xs text-secondary mb-0"><?= $laporan->nama_jabatan ?></p></td>
-            <td class="align-middle">
-              <a href="<?= base_url('auditor/edit_laporan/'.$laporan->id) ?>" class="btn btn-sm btn-warning">Edit</a>
-              <a href="<?= base_url('auditor/hapus_laporan/'.$laporan->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus laporan ini?')">Hapus</a>
-            </td>
-          </tr>
-          <?php endforeach; ?>
-        <?php else: ?>
-          <tr>
-            <td colspan="9" class="text-center text-secondary">Tidak ada data laporan audit.</td>
-          </tr>
-        <?php endif; ?>
-        </tbody>
-      </table>
+
+  <!-- TABLE -->
+  <div class="card m-3">
+    <div class="card-header pb-0">
+      <h6>Laporan Hasil Audit</h6>
+    </div>
+    <div class="card-body px-0 pb-2">
+      <div class="table-responsive p-3" style="max-height: 500px; overflow-y: auto;">
+        <table class="table table-hover table-bordered align-items-start mb-0">
+          <thead class="bg-light">
+            <tr>
+              <th>Kode Audit</th>
+              <th>Temuan</th>
+              <th>Rekomendasi</th>
+              <th>Rencana</th>
+              <th>Target Realisasi</th>
+              <th>Rencana Pelaksana</th>
+              <th>Tanggal</th>
+              <th>Nama Jabatan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (!empty($dataMb)): ?>
+              <?php foreach ($dataMb as $laporan): ?>
+              <tr>
+                <td><?= esc($laporan['kode_audit']) ?></td>
+                <td><?= esc($laporan['temuan']) ?></td>
+                <td><?= esc($laporan['rekomendasi']) ?></td>
+                <td><?= esc($laporan['rencana']) ?></td>
+                <td><?= esc($laporan['target_realisasi']) ?></td>
+                <td><?= esc($laporan['rencana_pelaksana']) ?></td>
+                <td><?= esc($laporan['tanggal']) ?></td>
+                <td><?= esc($laporan ['nama_jabatan']) ?></td>
+                <td>
+                  <button class="btn btn-warning btn-sm btnEditLaporan" 
+                    data-id="<?= $laporan['id'] ?>"
+                    data-kode_audit="<?= esc($laporan['kode_audit']) ?>"
+                    data-temuan="<?= esc($laporan['temuan']) ?>"
+                    data-rekomendasi="<?= esc($laporan['rekomendasi']) ?>"
+                    data-rencana="<?= esc($laporan['rencana']) ?>"
+                    data-target_realisasi="<?= esc($laporan['target_realisasi']) ?>"
+                    data-rencana_pelaksana="<?= esc($laporan['rencana_pelaksana']) ?>"
+                    data-tanggal="<?= esc($laporan['tanggal']) ?>"
+                    data-nama_jabatan="<?= esc($laporan['nama_jabatan']) ?>"
+                    data-bs-toggle="modal" data-bs-target="#modalEditLaporan">
+                    Edit
+                  </button>
+                  <a href="<?= base_url('auditor/hapus_laporan/'.$laporan['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus laporan ini?')">Hapus</a>
+                </td>
+              </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="9" class="text-center text-secondary">Tidak ada data laporan audit.</td>
+              </tr>
+            <?php endif; ?>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+
+  <!-- MODAL TAMBAH -->
+  <div class="modal fade" id="modalTambahLaporan" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <form action="<?= base_url('auditor/simpan_laporan') ?>" method="post" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Laporan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body row g-3">
+        <div class="col-md-6">
+  <label for="kode_audit" class="form-label">Kode Audit</label>
+  <select name="kode_audit" id="kode_audit" class="form-select" required>
+    <option value="" disabled selected>-- Pilih Kode Audit --</option>
+    <?php foreach ($dataAudit as $audit): ?>
+      <option value="<?= $audit['kode_audit'] ?>">
+      <?= $audit['kode_audit'] ?> - <?= $audit['nama_kegiatan_audit'] ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
 </div>
+
+          <div class="col-md-6">
+            <label>Target Realisasi</label>
+            <input type="date" name="target_realisasi" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label>Tanggal</label>
+            <input type="date" name="tanggal" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label>Nama Jabatan</label>
+            <input type="text" name="nama_jabatan" class="form-control" required>
+          </div>
+          <div class="col-12">
+            <label>Temuan</label>
+            <textarea name="temuan" class="form-control" required></textarea>
+          </div>
+          <div class="col-12">
+            <label>Rekomendasi</label>
+            <textarea name="rekomendasi" class="form-control" required></textarea>
+          </div>
+          <div class="col-12">
+            <label>Rencana</label>
+            <textarea name="rencana" class="form-control" required></textarea>
+          </div>
+          <div class="col-12">
+            <label>Rencana Pelaksana</label>
+            <textarea name="rencana_pelaksana" class="form-control" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL EDIT -->
+  <div class="modal fade" id="modalEditLaporan" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <form action="<?= base_url('auditor/update_laporan') ?>" method="post" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Laporan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <input type="hidden" name="id" id="edit_id">
+          <div class="col-md-6">
+            <label>Kode Audit</label>
+            <input type="text" name="kode_audit" id="edit_kode_audit" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label>Target Realisasi</label>
+            <input type="date" name="target_realisasi" id="edit_target_realisasi" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label>Tanggal</label>
+            <input type="date" name="tanggal" id="edit_tanggal" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label>Nama Jabatan</label>
+            <input type="text" name="nama_jabatan" id="edit_nama_jabatan" class="form-control" required>
+          </div>
+          <div class="col-12">
+            <label>Temuan</label>
+            <textarea name="temuan" id="edit_temuan" class="form-control" required></textarea>
+          </div>
+          <div class="col-12">
+            <label>Rekomendasi</label>
+            <textarea name="rekomendasi" id="edit_rekomendasi" class="form-control" required></textarea>
+          </div>
+          <div class="col-12">
+            <label>Rencana</label>
+            <textarea name="rencana" id="edit_rencana" class="form-control" required></textarea>
+          </div>
+          <div class="col-12">
+            <label>Rencana Pelaksana</label>
+            <textarea name="rencana_pelaksana" id="edit_rencana_pelaksana" class="form-control" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-warning">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.btnEditLaporan').forEach(button => {
+      button.addEventListener('click', () => {
+        document.getElementById('edit_id').value = button.dataset.id;
+        document.getElementById('edit_kode_audit').value = button.dataset.kode_audit;
+        document.getElementById('edit_temuan').value = button.dataset.temuan;
+        document.getElementById('edit_rekomendasi').value = button.dataset.rekomendasi;
+        document.getElementById('edit_rencana').value = button.dataset.rencana;
+        document.getElementById('edit_target_realisasi').value = button.dataset.target_realisasi;
+        document.getElementById('edit_rencana_pelaksana').value = button.dataset.rencana_pelaksana;
+        document.getElementById('edit_tanggal').value = button.dataset.tanggal;
+        document.getElementById('edit_nama_jabatan').value = button.dataset.nama_jabatan;
+      });
+    });
+  </script>
+</main>

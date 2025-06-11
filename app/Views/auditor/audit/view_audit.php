@@ -138,11 +138,11 @@
           <?php if (!empty($dataMb)): ?>
             <?php foreach ($dataMb as $a): ?>
             <tr>
-              <td><p class="text-xs font-weight-bold mb-0"><?= $a->kode_audit ?></p></td>
-              <td><p class="text-xs font-weight-bold mb-0"><?= $a->nama_kegiatan_audit ?></p></td>
+              <td><p class="text-xs font-weight-bold mb-0"><?= $a['kode_audit'] ?></p></td>
+              <td><p class="text-xs font-weight-bold mb-0"><?= $a['nama_kegiatan_audit'] ?></p></td>
               <td class="align-middle">
-                <a href="<?= base_url('auditor/edit_audit/'.$a->id_audit) ?>" class="btn btn-sm btn-warning">Edit</a>
-                <a href="<?= base_url('auditor/hapus_audit/'.$a->id_audit) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                <a href="<?= base_url('auditor/edit_audit/'.$a['id_audit']) ?>" class="btn btn-sm btn-warning">Edit</a>
+                <a href="<?= base_url('auditor/hapus_audit/'.$a['id_audit']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
               </td>
             </tr>
             <?php endforeach; ?>

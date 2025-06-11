@@ -118,62 +118,175 @@
       </div>
     </nav>
 
-           
   <!-- Table Card -->
   <div class="card m-3">
-    <div class="card-header pb-0">
+    <div class="card-header pb-0 d-flex justify-content-between align-items-center">
       <h6>Data Audit</h6>
+      <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalTambah">Tambah Data</button>
     </div>
     <div class="card-body px-0 pb-2">
       <div class="table-responsive p-3" style="max-height: 500px; overflow-y: auto;">
         <table class="table table-hover table-bordered align-items-center mb-0">
           <thead class="bg-light">
             <tr>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Indikator</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Domain</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Tahapan</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Aktivitas</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Indikator</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Level 1</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Level 2</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Level 3</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th>
+              <th>ID Kontrol</th>
+              <th>Domain</th>
+              <th>Tahapan</th>
+              <th>Aktivitas</th>
+              <th>Indikator</th>
+              <th>Level 1</th>
+              <th>Level 2</th>
+              <th>Level 3</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-          <?php if (!empty($dataMb)): ?>
-            <?php foreach ($dataMb as $a): ?>
-            <tr>
-              <td><p class="text-xs font-weight-bold mb-0"><?= $a->id_kontrol ?></p></td>
-              <td><p class="text-xs font-weight-bold mb-0"><?= $a->domain ?></p></td>
-              <td><p class="text-xs font-weight-bold mb-0"><?= $a->tahapan ?></p></td>
-              <td><p class="text-xs font-weight-bold mb-0"><?= $a->aktivitas ?></p></td>
-              <td style="white-space: normal; word-wrap: break-word;">
-                <p class="text-xs text-secondary mb-0"><?= $a->indikator ?></p>
-              </td>
-              <td style="white-space: normal; word-wrap: break-word;">
-                <p class="text-xs text-secondary mb-0"><?= $a->level_1 ?></p>
-              </td>
-              <td style="white-space: normal; word-wrap: break-word;">
-                <p class="text-xs text-secondary mb-0"><?= $a->level_2 ?></p>
-              </td>
-              <td style="white-space: normal; word-wrap: break-word;">
-                <p class="text-xs text-secondary mb-0"><?= $a->level_3 ?></p>
-              </td>
-              <td class="align-middle">
-                <a href="<?= base_url('auditor/edit_audit/'.$a->id_kontrol) ?>" class="btn btn-sm btn-warning">Edit</a>
-                <a href="<?= base_url('auditor/hapus_audit/'.$a->id_kontrol) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-              </td>
-            </tr>
-            <?php endforeach; ?>
-          <?php else: ?>
-            <tr>
-              <td colspan="6" class="text-center text-secondary">Tidak ada data.</td>
-            </tr>
-          <?php endif; ?>
-        </tbody>
+            <?php if (!empty($dataMb)): ?>
+              <?php foreach ($dataMb as $a): ?>
+                <tr>
+                  <td><?= $a['id_kontrol'] ?></td>
+                  <td><?= $a['domain'] ?></td>
+                  <td><?= $a['tahapan'] ?></td>
+                  <td><?= $a['aktivitas'] ?></td>
+                  <td><?= $a['indikator'] ?></td>
+                  <td><?= $a['level_1'] ?></td>
+                  <td><?= $a['level_2'] ?></td>
+                  <td><?= $a['level_3'] ?></td>
+                  <td>
+                    <button class="btn btn-sm btn-warning btnEditKomponen"
+                      data-id="<?= $a['id_kontrol'] ?>"
+                      data-domain="<?= $a['domain'] ?>"
+                      data-tahapan="<?= $a['tahapan'] ?>"
+                      data-aktivitas="<?= $a['aktivitas'] ?>"
+                      data-indikator="<?= $a['indikator'] ?>"
+                      data-level1="<?= $a['level_1'] ?>"
+                      data-level2="<?= $a['level_2'] ?>"
+                      data-level3="<?= $a['level_3'] ?>"
+                      data-bs-toggle="modal" data-bs-target="#modalEdit">
+                      Edit
+                    </button>
+                    <a href="<?= base_url('auditor/hapus_komponen/'.$a['id_kontrol']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="9" class="text-center text-secondary">Tidak ada data.</td>
+              </tr>
+            <?php endif; ?>
+          </tbody>
         </table>
       </div>
     </div>
   </div>
-  
+
+  <!-- Modal Tambah -->
+  <div class="modal fade" id="modalTambah" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <form action="<?= base_url('auditor/simpan_komponen') ?>" method="post" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Komponen</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <div class="col-md-6">
+            <label>ID Kontrol</label>
+            <input type="text" class="form-control" name="id_kontrol" required>
+          </div>
+          <div class="col-md-6">
+            <label>Domain</label>
+            <input type="text" class="form-control" name="domain" required>
+          </div>
+          <div class="col-md-6">
+            <label>Tahapan</label>
+            <input type="text" class="form-control" name="tahapan" required>
+          </div>
+          <div class="col-md-12">
+            <label>Aktivitas</label>
+            <textarea class="form-control" name="aktivitas" rows="2"></textarea>
+          </div>
+          <div class="col-md-12">
+            <label>Indikator</label>
+            <textarea class="form-control" name="indikator" rows="2"></textarea>
+          </div>
+          <div class="col-md-4">
+            <label>Level 1</label>
+            <textarea class="form-control" name="level_1"></textarea>
+          </div>
+          <div class="col-md-4">
+            <label>Level 2</label>
+            <textarea class="form-control" name="level_2"></textarea>
+          </div>
+          <div class="col-md-4">
+            <label>Level 3</label>
+            <textarea class="form-control" name="level_3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Edit -->
+  <div class="modal fade" id="modalEdit" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <form action="<?= base_url('auditor/update_komponen') ?>" method="post" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Komponen</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <input type="hidden" name="id_kontrol" id="edit_id_kontrol">
+          <div class="col-md-6">
+            <label>Domain</label>
+            <input type="text" class="form-control" name="domain" id="edit_domain">
+          </div>
+          <div class="col-md-6">
+            <label>Tahapan</label>
+            <input type="text" class="form-control" name="tahapan" id="edit_tahapan">
+          </div>
+          <div class="col-md-12">
+            <label>Aktivitas</label>
+            <textarea class="form-control" name="aktivitas" id="edit_aktivitas"></textarea>
+          </div>
+          <div class="col-md-12">
+            <label>Indikator</label>
+            <textarea class="form-control" name="indikator" id="edit_indikator"></textarea>
+          </div>
+          <div class="col-md-4">
+            <label>Level 1</label>
+            <textarea class="form-control" name="level_1" id="edit_level1"></textarea>
+          </div>
+          <div class="col-md-4">
+            <label>Level 2</label>
+            <textarea class="form-control" name="level_2" id="edit_level2"></textarea>
+          </div>
+          <div class="col-md-4">
+            <label>Level 3</label>
+            <textarea class="form-control" name="level_3" id="edit_level3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-warning">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.btnEditKomponen').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.getElementById('edit_id_kontrol').value = this.dataset.id;
+        document.getElementById('edit_domain').value = this.dataset.domain;
+        document.getElementById('edit_tahapan').value = this.dataset.tahapan;
+        document.getElementById('edit_aktivitas').value = this.dataset.aktivitas;
+        document.getElementById('edit_indikator').value = this.dataset.indikator;
+        document.getElementById('edit_level1').value = this.dataset.level1;
+        document.getElementById('edit_level2').value = this.dataset.level2;
+        document.getElementById('edit_level3').value = this.dataset.level3;
+      });
+    });
+  </script>
+</main>

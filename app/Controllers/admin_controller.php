@@ -167,4 +167,63 @@ class Admin_controller extends BaseController
         $this->auditeeModel->delete($id);
         return redirect()->to('/superadmin/auditee')->with('success', 'Data Auditee berhasil dihapus.');
     }
+
+    // Menampilkan semua user
+    public function index_users()
+    {
+        $keyword = $this->request->getGet('keyword');
+        $builder = $this->userModel;
+
+        if ($keyword) {
+            $builder = $builder->like('username', $keyword)
+                               ->orLike('role', $keyword);
+        }
+
+        $data['judul'] = 'Data Users';
+        $data['users'] = $builder->paginate(10, 'users');
+        $data['pager'] = $this->userModel->pager;
+        $data['keyword'] = $keyword;
+
+        echo view('superadmin/layout/header');
+        echo view('superadmin/layout/nav');
+        echo view('superadmin/users/view_users', $data); // buat view ini nanti
+        echo view('superadmin/layout/footer');
+    }
+
+    // Simpan user baru
+    public function save_users()
+    {
+        $data = [
+            'username' => $this->request->getPost('username'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'role'     => $this->request->getPost('role')
+        ];
+        $this->userModel->insert($data);
+        return redirect()->to(base_url('superadmin/users'))->with('success', 'User berhasil ditambahkan.');
+    }
+
+    // Update user
+    public function update_users($id)
+    {
+        $data = [
+            'username' => $this->request->getPost('username'),
+            'role'     => $this->request->getPost('role')
+        ];
+
+        // Update password jika tidak kosong
+        $password = $this->request->getPost('password');
+        if (!empty($password)) {
+            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        $this->userModel->update($id, $data);
+        return redirect()->to(base_url('superadmin/users'))->with('success', 'User berhasil diperbarui.');
+    }
+
+    // Hapus user
+    public function delete_users($id)
+    {
+        $this->userModel->delete($id);
+        return redirect()->to(base_url('superadmin/users'))->with('success', 'User berhasil dihapus.');
+    }
 }

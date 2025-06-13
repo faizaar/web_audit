@@ -25,6 +25,12 @@ $routes->get('superadmin/auditee', 'admin_controller::index_auditee');          
 $routes->post('superadmin/auditee/save', 'admin_controller::save_auditee');                 // Simpan auditee baru
 $routes->post('superadmin/auditee/update/(:num)', 'admin_controller::update_auditee/$1');   // Update auditee
 $routes->get('superadmin/auditee/delete/(:num)', 'admin_controller::delete_auditee/$1');    // Hapus auditee
+// Users - Superadmin Role
+$routes->get('superadmin/users', 'admin_controller::index_users');                          // Tampilkan halaman user (tabel + modal)
+$routes->post('superadmin/users/save', 'admin_controller::save_users');                     // Simpan user baru
+$routes->post('superadmin/users/update/(:num)', 'admin_controller::update_users/$1');       // Update user via modal
+$routes->get('superadmin/users/delete/(:num)', 'admin_controller::delete_users/$1');        // Hapus user
+
 
 
 // ====================

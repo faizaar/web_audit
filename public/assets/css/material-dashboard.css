@@ -29151,4 +29151,10 @@ pre[class*=language-] {
   }
 }
 
+.nav-link.active {
+    background-color: grey !important; /* Ganti dengan warna latar belakang yang diinginkan */
+    color: white !important; /* Ganti dengan warna teks yang diinginkan */
+}
+
+
 /*# sourceMappingURL=dashboard-free.css.map */

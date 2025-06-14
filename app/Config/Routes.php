@@ -78,12 +78,11 @@ $routes->get('auditor/alat', 'auditor::view_alat');
 $routes->get('auditor/audit', 'auditor::view_audit');
 
 
-$routes->get('auditor/alat/view_alat', 'AlatController::view_alat');
-$routes->get('auditor/alat/add_alat', 'AlatController::add_alat');
-$routes->post('auditor/alat/store_alat', 'AlatController::store_alat');
-$routes->get('auditor/alat/edit_alat/(:num)', 'AlatController::edit_alat/$1');
-$routes->post('auditor/alat/update_alat/(:num)', 'AlatController::update_alat/$1');
-$routes->get('auditor/alat/hapus_alat/(:num)', 'AlatController::delete_alat/$1');
+$routes->get('auditor/alat/view_alat', 'Auditor::view_alat');
+$routes->get('auditor/alat/add_alat', 'Auditor::add_alat');
+$routes->post('auditor/alat/store_alat', 'Auditor::store_alat');
+$routes->post('auditor/alat/update_alat/(:num)', 'Auditor::update_alat/$1');
+$routes->get('auditor/alat/delete_alat/(:num)', 'Auditor::delete_alat/$1');
 
 //RESIKO
 $routes->get('auditor/resiko', 'auditor::view_risiko');
@@ -113,7 +112,7 @@ $routes->get('auditor/dokumen', 'auditor::view_dokumen');
 $routes->get('auditor/jadwal', 'Auditor::view_jadwal'); 
 $routes->post('auditor/tambah_jadwal', 'Auditor::tambah_jadwal');
 $routes->post('auditor/edit_jadwal', 'Auditor::edit_jadwal');
-$routes->get('auditor/hapus_jadwal/(:num)', 'Auditor::hapus_jadwal/$1');
+$routes->get('auditor/hapus_jadwal/(:segment)', 'Auditor::hapus_jadwal/$1');
 
 // alokasi 
 // Rute untuk menampilkan halaman alokasi

@@ -9,12 +9,11 @@ class Model_alokasi extends Model
     protected $returnType = 'array';
     protected $allowedFields = [
         'kode_alokasi',
-        'kode_aset',
+        'id_aset',
         'kode_risiko',
         'kode_kontrol',
         'id_dokumen',
         'teknik_pengujian',
-        'dokumentasi',
         'id_jadwal',
         'id_auditor',
         'kode_alat',
@@ -40,7 +39,7 @@ class Model_alokasi extends Model
                 akun_auditor.nama AS nama_auditor, 
                 alat.nama_alat
             ')
-            ->join('aset', 'aset.kode_aset = alokasi.kode_aset', 'left')
+            ->join('aset', 'aset.id_aset = alokasi.id_aset', 'left')
             ->join('risiko', 'risiko.kode_risiko = alokasi.kode_risiko', 'left')
             ->join('komponen_penilaian', 'komponen_penilaian.id_kontrol = alokasi.kode_kontrol', 'left')
             ->join('dokumen', 'dokumen.id_dokumen = alokasi.id_dokumen', 'left')

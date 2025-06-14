@@ -170,10 +170,12 @@
                 </td>
                 <td>
                   <!-- Check if the file exists and display it -->
-                  <?php if (!empty($a['file_path'])): ?>
-                    <a href="<?= base_url('uploads/dokumen/' . $a['file_path']) ?>" class="btn btn-sm btn-info" target="_blank">Lihat File</a>
-                  <?php else: ?>
-                    <p class="text-xs text-secondary mb-0">No file</p>
+                  <?php if (!empty($a['file'])): ?>
+                      <a href="<?= base_url('uploads/dokumen/' . $a['file']) ?>" 
+                      class="btn btn-sm btn-info" 
+                      download="<?= $a['file'] ?>">Download</a>
+                      <?php else: ?>
+                      <p class="text-xs text-secondary mb-0">No file</p>
                   <?php endif; ?>
                 </td>
                 <td class="align-middle">

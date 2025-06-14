@@ -8,14 +8,13 @@ class Model_alatauditor extends Model
     protected $primaryKey = 'id_alat';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $useSodtDeletes = false;
+    protected $useSoftDeletes = false;
     protected $allowedFields = [
         'kode_alat',
         'nama_alat',
         'spesifikasi',
         'disiapkan_oleh',
         'fungsi',
-        'id_auditee'
     ];
     protected $useTimestamps = false;
 

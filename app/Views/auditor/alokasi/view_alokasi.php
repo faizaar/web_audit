@@ -21,7 +21,6 @@
               <th>Kontrol</th>
               <th>Dokumen</th>
               <th>Teknik Pengujian</th>
-              <th>Dokumentasi</th>
               <th>Penilaian Level</th>
               <th>Jadwal</th>
               <th>Auditor</th>
@@ -38,7 +37,6 @@
               <td><?= esc($a['kode_kontrol']) ?></td>
               <td><?= esc($a['id_dokumen']) ?></td>
               <td><?= esc($a['teknik_pengujian']) ?></td>
-              <td><?= esc($a['dokumentasi']) ?></td>
               <td><?= esc($a['penilaian_level']) ?></td>
               <td><?= esc($a['id_jadwal']) ?></td>
               <td><?= esc($a['id_auditor']) ?></td>
@@ -52,7 +50,6 @@
                    data-kode_kontrol="<?= esc($a['kode_kontrol']) ?>"
                    data-id_dokumen="<?= esc($a['id_dokumen']) ?>"
                    data-teknik_pengujian="<?= esc($a['teknik_pengujian']) ?>"
-                   data-dokumentasi="<?= esc($a['dokumentasi']) ?>"
                    data-penilaian_level="<?= esc($a['penilaian_level']) ?>"
                    data-id_jadwal="<?= esc($a['id_jadwal']) ?>"
                    data-id_auditor="<?= esc($a['id_auditor']) ?>"
@@ -87,10 +84,10 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label">Aset</label>
-                <select name="kode_aset" class="form-select" required>
+                <select name="id_aset" class="form-select" required>
                   <option disabled selected>-- Pilih Aset --</option>
                   <?php foreach ($aset as $item): ?>
-                    <option value="<?= $item['kode_aset'] ?>"><?= $item['kode_aset'] ?> - <?= $item['nama_aset'] ?></option>
+                    <option value="<?= $item['id_aset'] ?>"><?= $item['id_aset'] ?> - <?= $item['nama_aset'] ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -161,8 +158,8 @@
               </div>
               <!-- Kolom Dokumentasi -->
               <div class="col-12">
-                <label for="dokumentasi" class="form-label">Dokumentasi</label>
-                <input type="text" class="form-control" name="dokumentasi" required>
+                <label for="teknik_pengujian" class="form-label">teknik pengujian</label>
+                <input type="text" class="form-control" name="teknik_pengujian" required>
               </div>
             </div>
           </div>
@@ -223,7 +220,7 @@
 
     // Ambil data dari tombol Edit
     var kode_alokasi = button.data('id');
-    var kode_aset = button.data('kode_aset');
+    var kode_aset = button.data('id_aset');
     var kode_risiko = button.data('kode_risiko');
     var kode_kontrol = button.data('kode_kontrol');
     var id_dokumen = button.data('id_dokumen');

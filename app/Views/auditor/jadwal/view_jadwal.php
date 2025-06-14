@@ -129,42 +129,50 @@
     </div>
     <div class="card-body px-0 pb-2">
         <div class="table-responsive p-3" style="max-height: 500px; overflow-y: auto;">
-            <table class="table table-bordered table-hover align-middle mb-0">
-                <thead class="table-light text-center">
-                    <tr>
-                        <th class="text-nowrap">ID Kegiatan</th>
-                        <th>Nama Kegiatan</th>
-                        <th>Hari / Tanggal</th>
-                        <th>Jam</th>
-                        <th>Target Luaran</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (!empty($dataMb)): ?>
-                        <?php foreach ($dataMb as $row): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($row->id_kegiatan) ?></td>
-                                <td><?= htmlspecialchars($row->nama_kegiatan) ?></td>
-                                <td><?= htmlspecialchars($row->hari_tanggal) ?></td>
-                                <td><?= htmlspecialchars($row->jam) ?></td>
-                                <td><?= htmlspecialchars($row->target_luaran) ?></td>
-                                <td class="text-center">
-                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" data-id="<?= $row->id_kegiatan ?>" data-nama="<?= $row->nama_kegiatan ?>" data-hari="<?= $row->hari_tanggal ?>" data-jam="<?= $row->jam ?>" data-target="<?= $row->target_luaran ?>">Edit</button>
-                                    <a href="<?= base_url('auditor/hapus_jadwal/'.$row->id_kegiatan) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="6" class="text-center text-muted">Belum ada data jadwal audit.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+            <!-- Tabel Data Jadwal -->
+<table class="table table-hover table-bordered align-items-center mb-0">
+  <thead class="bg-light">
+    <tr>
+      <th>No</th>
+      <th>Nama Kegiatan</th>
+      <th>Hari & Tanggal</th>
+      <th>Jam</th>
+      <th>Target Luaran</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php if (!empty($dataMb)): ?>
+      <?php $no = 1; ?>
+      <?php foreach ($dataMb as $j): ?>
+        <tr>
+          <td><?= $no++ ?></td>
+          <td><?= $j->nama_kegiatan ?></td>
+          <td><?= $j->hari_tanggal ?></td>
+          <td><?= $j->jam ?></td>
+          <td><?= $j->target_luaran ?></td>
+          <td>
+            <button class="btn btn-warning btn-sm btnEdit" data-bs-toggle="modal" data-bs-target="#modalEdit"
+              data-id="<?= $j->id_kegiatan ?>"
+              data-nama="<?= $j->nama_kegiatan ?>"
+              data-hari="<?= $j->hari_tanggal ?>"
+              data-jam="<?= $j->jam ?>"
+              data-luaran="<?= $j->target_luaran ?>">
+              Edit
+            </button>
+            <a href="<?= base_url('auditor/hapus_jadwal/' . $j->id_kegiatan) ?>"
+              class="btn btn-danger btn-sm"
+              onclick="return confirm('Yakin ingin menghapus jadwal ini?')">Hapus</a>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <tr>
+        <td colspan="6" class="text-center text-secondary">Tidak ada data.</td>
+      </tr>
+    <?php endif; ?>
+  </tbody>
+</table>
 
 <!-- Modal untuk Tambah Jadwal -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -207,38 +215,52 @@
 </div>
 
 <!-- Modal untuk Edit Jadwal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="<?= base_url('auditor/edit_jadwal') ?>" method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Jadwal Audit</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" id="edit_id" name="id_jadwal">
-                    <div class="mb-3">
-                        <label for="edit_nama_kegiatan" class="form-label">Nama Kegiatan</label>
-                        <input type="text" class="form-control" id="edit_nama_kegiatan" name="nama_kegiatan" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_hari_tanggal" class="form-label">Hari / Tanggal</label>
-                        <input type="date" class="form-control" id="edit_hari_tanggal" name="hari_tanggal" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_jam" class="form-label">Jam</label>
-                        <input type="time" class="form-control" id="edit_jam" name="jam" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit_target_luaran" class="form-label">Target Luaran</label>
-                        <input type="text" class="form-control" id="edit_target_luaran" name="target_luaran" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                </div>
-            </div>
-        </form>
-    </div>
+<!-- Modal Edit Jadwal -->
+<div class="modal fade" id="modalEdit" tabindex="-1">
+  <div class="modal-dialog">
+    <form action="<?= base_url('auditor/edit_jadwal') ?>" method="post" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Jadwal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="id_jadwal" id="edit_id_jadwal">
+        <div class="mb-3">
+          <label>Nama Kegiatan</label>
+          <input type="text" class="form-control" name="nama_kegiatan" id="edit_nama_kegiatan" required>
+        </div>
+        <div class="mb-3">
+          <label>Hari & Tanggal</label>
+          <input type="date" class="form-control" name="hari_tanggal" id="edit_hari_tanggal" required>
+        </div>
+        <div class="mb-3">
+          <label>Jam</label>
+          <input type="text" class="form-control" name="jam" id="edit_jam" required>
+        </div>
+        <div class="mb-3">
+          <label>Target Luaran</label>
+          <input type="text" class="form-control" name="target_luaran" id="edit_target_luaran" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    </form>
+  </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const editButtons = document.querySelectorAll(".btnEdit");
+    editButtons.forEach(btn => {
+      btn.addEventListener("click", function () {
+        document.getElementById("edit_id_jadwal").value = this.dataset.id;
+        document.getElementById("edit_nama_kegiatan").value = this.dataset.nama;
+        document.getElementById("edit_hari_tanggal").value = this.dataset.hari;
+        document.getElementById("edit_jam").value = this.dataset.jam;
+        document.getElementById("edit_target_luaran").value = this.dataset.luaran;
+      });
+    });
+  });
+</script>
+

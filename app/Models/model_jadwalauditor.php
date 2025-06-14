@@ -28,7 +28,7 @@ class model_jadwalauditor extends Model
 
     public function getJadwalById($id)
     {
-        return $this->whare('id_jadwal', $id)->first();
+        return $this->where('id_kegiatan', $id)->first(); // BENAR
     }
     public function tampilJadwal_byid($id_auditee)
     {

@@ -49,5 +49,10 @@ class model_asetauditor extends Model
     {
         return $this->delete($id_aset);
     }
+
+    public function getAset()
+    {
+        return $this->findAll();
+    }
 }
 

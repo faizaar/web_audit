@@ -41,6 +41,8 @@ $routes->get('login', 'Login::form_login');
 $routes->post('login/process', 'Login::process');
 $routes->get('auditee/logout', 'Login::logout');
 $routes->get('auditor/logout', 'auditor::logout');
+//Hasil Penilaian
+$routes->get('auditee/hasil_penilaian', 'auditee::view_hasilpenilaian');
 
 
 // Dashboard dan View

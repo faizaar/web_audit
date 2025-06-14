@@ -55,7 +55,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Data</a>
                             <div class="dropdown-menu m-0">
-                                <a href="<?= base_url('auditee/alat'); ?>" class="dropdown-item">Data Alat</a>
+                                <!-- <a href="<?= base_url('auditee/alat'); ?>" class="dropdown-item">Data Alat</a> -->
                                 <a href="<?= base_url('auditee/aset'); ?>" class="dropdown-item">Data Aset</a>
                                 <a href="<?= base_url('auditee/dokumen'); ?>" class="dropdown-item">Data Dokumen</a>
                             </div>

@@ -6,7 +6,7 @@ class model_risiko extends Model
 {
     protected $table = 'risiko';
     protected $returnType = 'array';
-    protected $primaryKey = 'kode_risiko';
+    protected $primaryKey = 'id_risiko';
     protected $allowedFields = [
         'kode_risiko', 
         'kode_aset', 
@@ -39,9 +39,11 @@ class model_risiko extends Model
 
     // Ambil data berdasarkan kode_risiko
     public function getRisikoById($kode_risiko)
-    {
-        return $this->where('kode_risiko', $kode_risiko)->first();
-    }
+{
+    // Pastikan bahwa kode_risiko dicari sebagai string
+    return $this->where('kode_risiko', $kode_risiko)->first();
+}
+
 
     // Update data risiko
     public function updateData($kode_risiko, $data)

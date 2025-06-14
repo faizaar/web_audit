@@ -3,9 +3,11 @@
 namespace App\Controllers;
 
 use App\Models\Model_alatauditor;
+use App\Models\model_alokasi;
 use App\Models\model_asetauditor;
 use App\Models\model_auditee;
 use App\Models\model_dokumenauditor;
+use App\Models\model_hasilpenilaian;
 use App\Models\model_jadwalauditor;
 use CodeIgniter\Session\Session;
 
@@ -13,13 +15,17 @@ class auditee extends BaseController
 {
     public function view_auditee()
     {
+        $model = new model_hasilpenilaian();
+
         $id = session()->get('id_auditee');
         $model = new model_auditee();
         $dokumen = new model_dokumenauditor();
+        $pending = new model_hasilpenilaian();
         $id = session()->get('auditee_id'); // Ambil dari session
         $data = [
             'auditee' => $model->getProfile($id), // Ambil data auditee
             'total_dokumen' => $dokumen->countAllDokumen(),
+            // 'jumlah_belum_dinilai' => $pending->hitungJumlahBelumDinilai(),
         ];
 
         echo view('auditee/layout/header');
@@ -46,7 +52,7 @@ class auditee extends BaseController
 
         // ✅ Cek apakah ID valid
         if (!$id) {
-            return redirect()->to(base_url('auditee/login'))->with('error', 'Anda belum login.');
+            return redirect()->to(base_url('login'))->with('error', 'Anda belum login.');
         }
 
         // ✅ Ambil data dari database
@@ -267,6 +273,21 @@ class auditee extends BaseController
         $model->delete($id_alat);
 
         return redirect()->to(base_url('auditee/alat'));
+    }
+
+    public function view_hasilpenilaian()
+    {
+        
+        // Load model jika belum ada di controller
+        $model = new model_hasilpenilaian();
+
+        // Ambil data hasil penilaian dari model
+        $data['hasil_penilaian'] = $model->getHasilPenilaian();
+
+        // Tampilkan hasil penilaian di view
+        echo view('auditee/layout/header');
+        echo view('auditee/hasil_penilaian/view_hasilpenilaian', $data);
+        echo view('auditee/layout/footer');
     }
 
 }

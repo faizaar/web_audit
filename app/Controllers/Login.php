@@ -41,6 +41,7 @@ class Login extends BaseController
                     session()->set([
                         'id_user' => $user['id_user'],
                         'nama' => $profil['nama'],
+                        'id_auditor' => $profil['id_auditor'],
                         'logged_in' => true
                     ]);
                     return redirect()->to(base_url('auditor'));
@@ -56,6 +57,7 @@ class Login extends BaseController
                     session()->set([
                         'user_id' => $profil['user_id'],
                         'auditee' => $profil['auditee'],
+                        'id_auditee' => $profil['id_auditee'],
                         'logged_in' => true
                     ]);
                     return redirect()->to(base_url('auditee/dashboard'));

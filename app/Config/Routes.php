@@ -78,11 +78,11 @@ $routes->get('auditor/alat', 'auditor::view_alat');
 $routes->get('auditor/audit', 'auditor::view_audit');
 
 //RESIKO
-$routes->get('auditor/risiko', 'auditor::view_risiko');
-$routes->post('auditor/simpan_risiko', 'Auditor::simpan_risiko');
-$routes->get('auditor/edit_risiko/(:any)', 'Auditor::edit_risiko/$1');
-$routes->post('auditor/update_risiko', 'Auditor::update_risiko');
-$routes->get('auditor/hapus_risiko/(:any)', 'Auditor::hapus_risiko/$1');
+$routes->get('auditor/resiko', 'auditor::view_risiko');
+$routes->post('auditor/resiko/simpan_risiko', 'Auditor::simpan_risiko');
+$routes->get('auditor/resiko/edit_risiko/(:segment)', 'Auditor::edit_risiko/$1');
+$routes->post('auditor/resiko/update_risiko', 'Auditor::update_risiko');
+$routes->get('auditor/resiko/hapus_risiko/(:any)', 'Auditor::hapus_risiko/$1');
 
 //Laporan Hasil 
 $routes->get('auditor/laporan_hasil', 'auditor::view_tampilan_hasil');
@@ -101,8 +101,21 @@ $routes->get('auditor/hapus_komponen/(:segment)', 'Auditor::hapus_komponen/$1');
 
 $routes->get('auditor/dokumen', 'auditor::view_dokumen');
 
+//JADWAL
+$routes->get('auditor/jadwal', 'Auditor::view_jadwal'); 
+$routes->post('auditor/tambah_jadwal', 'Auditor::tambah_jadwal');
+$routes->post('auditor/edit_jadwal', 'Auditor::edit_jadwal');
+$routes->get('auditor/hapus_jadwal/(:num)', 'Auditor::hapus_jadwal/$1');
 
-$routes->get('auditor/alokasi', 'auditor::view_alokasi');              // untuk tampilan
-$routes->post('auditor/alokasi/simpan', 'auditor::simpan_alokasi');    // untuk tambah (dari modal)
-$routes->post('Auditor/alokasi/update', 'auditor::update_alokasi');    // untuk update (dari modal edit)
-$routes->get('auuditor/alokasi/hapus/(:segment)', 'auditor::hapus_alokasi/$1'); // untuk hapus
+// alokasi 
+// Rute untuk menampilkan halaman alokasi
+$routes->get('auditor/alokasi', 'Auditor::view_alokasi'); // Untuk tampilan
+
+// Rute untuk menyimpan data alokasi (menambahkan data)
+$routes->post('auditor/alokasi/simpan', 'Auditor::simpan_alokasi'); // Untuk tambah (dari modal)
+
+// Rute untuk memperbarui data alokasi
+$routes->post('auditor/alokasi/update', 'Auditor::update_alokasi'); // Untuk update (dari modal edit)
+
+// Rute untuk menghapus data alokasi
+$routes->get('auditor/alokasi/hapus/(:segment)', 'Auditor::hapus_alokasi/$1'); // Untuk hapus

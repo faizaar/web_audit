@@ -17,7 +17,8 @@ class Model_alokasi extends Model
         'dokumentasi',
         'id_jadwal',
         'id_auditor',
-        'kode_alat'
+        'kode_alat',
+        'penilaian_level',
     ];
 
     public function __construct()
@@ -33,8 +34,8 @@ class Model_alokasi extends Model
                 alokasi.*, 
                 aset.nama_aset, 
                 risiko.penyebab, 
-                komponen_penilaian.nama_kontrol, 
-                dokumen.nama_dokumen, 
+                komponen_penilaian.indikator , 
+                dokumen.jenis, 
                 jadwal.nama_kegiatan, 
                 akun_auditor.nama AS nama_auditor, 
                 alat.nama_alat

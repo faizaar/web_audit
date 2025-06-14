@@ -4,7 +4,6 @@ use CodeIgniter\Model;
 
 class model_komponenauditor extends Model
 {
-<<<<<<< HEAD
     protected $table      = 'komponen_penilaian';
     protected $primaryKey = 'id_kontrol';
     protected $allowedFields = [
@@ -17,12 +16,7 @@ class model_komponenauditor extends Model
         parent::__construct();
         $this->db = db_connect();
     }
-=======
-    protected $table = 'komponen_penilaian';
- 
->>>>>>> c5d1b21591cd36d6309f4f595a8f52de13bf3f5b
 
-    // Ambil semua data
     public function tampilkomponen()
     {
         return $this->findAll();

@@ -31,7 +31,7 @@ class model_asetauditor extends Model
 
     public function getAsetById($id)
     {
-        return $this->where('id_aset', $id)->first();
+        return $this->where('kode_aset', $id)->first();
 
     }
 

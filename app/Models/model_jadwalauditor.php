@@ -5,12 +5,12 @@ use CodeIgniter\Model;
 class model_jadwalauditor extends Model
 {
     protected $table = 'jadwal';
-    protected $primaryKey = 'id_jadwal';
+    protected $primaryKey = 'id_kegiatan';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $useSodtDelete = false;
-    protected $allowFields =
-        [
+    protected $useSoftDeletes = false; 
+    protected $allowedFields = [  
+            'id_kegiatan',
             'nama_kegiatan',
             'hari_tanggal',
             'jam',

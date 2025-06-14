@@ -141,17 +141,6 @@
         <table class="table table-hover table-bordered align-items-center mb-0">
           <thead class="bg-light">
             <tr>
-<<<<<<< HEAD
-              <th>ID Kontrol</th>
-              <th>Domain</th>
-              <th>Tahapan</th>
-              <th>Aktivitas</th>
-              <th>Indikator</th>
-              <th>Level 1</th>
-              <th>Level 2</th>
-              <th>Level 3</th>
-              <th>Aksi</th>
-=======
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder">NO</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Indikator</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Domain</th>
@@ -167,32 +156,6 @@
           </thead>
           <tbody>
             <?php if (!empty($dataMb)): ?>
-<<<<<<< HEAD
-              <?php foreach ($dataMb as $a): ?>
-                <tr>
-                  <td><?= $a['id_kontrol'] ?></td>
-                  <td><?= $a['domain'] ?></td>
-                  <td><?= $a['tahapan'] ?></td>
-                  <td><?= $a['aktivitas'] ?></td>
-                  <td><?= $a['indikator'] ?></td>
-                  <td><?= $a['level_1'] ?></td>
-                  <td><?= $a['level_2'] ?></td>
-                  <td><?= $a['level_3'] ?></td>
-                  <td>
-                    <button class="btn btn-sm btn-warning btnEditKomponen"
-                      data-id="<?= $a['id_kontrol'] ?>"
-                      data-domain="<?= $a['domain'] ?>"
-                      data-tahapan="<?= $a['tahapan'] ?>"
-                      data-aktivitas="<?= $a['aktivitas'] ?>"
-                      data-indikator="<?= $a['indikator'] ?>"
-                      data-level1="<?= $a['level_1'] ?>"
-                      data-level2="<?= $a['level_2'] ?>"
-                      data-level3="<?= $a['level_3'] ?>"
-                      data-bs-toggle="modal" data-bs-target="#modalEdit">
-                      Edit
-                    </button>
-                    <a href="<?= base_url('auditor/hapus_komponen/'.$a['id_kontrol']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-=======
               <?php $no = 1 + (20 * ($currentPage - 1)); ?>
               <?php foreach ($dataMb as $a): ?>
                 <tr>
@@ -234,11 +197,7 @@
               <?php endforeach; ?>
             <?php else: ?>
               <tr>
-<<<<<<< HEAD
                 <td colspan="9" class="text-center text-secondary">Tidak ada data.</td>
-=======
-                <td colspan="6" class="text-center text-secondary">Tidak ada data.</td>
->>>>>>> c5d1b21591cd36d6309f4f595a8f52de13bf3f5b
               </tr>
             <?php endif; ?>
           </tbody>
@@ -253,7 +212,6 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
   </div>
 
   <!-- Modal Tambah -->
@@ -366,6 +324,4 @@
     });
   </script>
 </main>
-=======
   </div>
->>>>>>> c5d1b21591cd36d6309f4f595a8f52de13bf3f5b

@@ -17,18 +17,24 @@
       </li>
 
       <!-- Menu Data Tabel -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link text-dark" href="<?= base_url('auditor/audit') ?>">
           <i class="material-symbols-rounded opacity-5">fact_check</i>
           <span class="nav-link-text ms-1">Audit</span>
         </a>
-      </li>
+      </li> -->
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/audit') ?>">
+        <a class="nav-link text-dark" href="<?= base_url('auditor/jadwal') ?>">
           <i class="material-symbols-rounded opacity-5">fact_check</i>
           <span class="nav-link-text ms-1">jadwal kegiatan</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="<?= base_url('auditor/alat') ?>">
+          <i class="material-symbols-rounded opacity-5">build</i>
+          <span class="nav-link-text ms-1">Alat</span>
+        </a>
+      </li> 
       <li class="nav-item">
         <a class="nav-link text-dark" href="<?= base_url('auditor/aset') ?>">
           <i class="material-symbols-rounded opacity-5">category</i>
@@ -36,7 +42,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/risiko') ?>">
+        <a class="nav-link text-dark" href="<?= base_url('auditor/resiko') ?>">
           <i class="material-symbols-rounded opacity-5">warning</i>
           <span class="nav-link-text ms-1">Risiko</span>
         </a>
@@ -54,21 +60,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/laporan_hasil') ?>">
-          <i class="material-symbols-rounded opacity-5">analytics</i>
-          <span class="nav-link-text ms-1">Laporan Audit</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link text-dark" href="<?= base_url('auditor/alokasi') ?>">
           <i class="material-symbols-rounded opacity-5">inventory</i>
           <span class="nav-link-text ms-1">Alokasi</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/alat') ?>">
-          <i class="material-symbols-rounded opacity-5">build</i>
-          <span class="nav-link-text ms-1">Alat</span>
         </a>
       </li>
 

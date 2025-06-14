@@ -64,8 +64,8 @@
                 <td style="white-space: normal;"><?= esc($r['mitigasi_penyebab']) ?></td>
                 <td style="white-space: normal;"><?= esc($r['mitigasi_dampak']) ?></td>
                 <td>
-                  <a href="<?= base_url('auditor/edit_risiko/' . $r['kode_risiko']) ?>" class="btn btn-sm btn-warning">Edit</a>
-                  <a href="<?= base_url('auditor/hapus_risiko/' . $r['kode_risiko']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data risiko ini?')">Hapus</a>
+                  <a href="<?= base_url('auditor/resiko/edit_risiko/' . $r['kode_risiko']) ?>" class="btn btn-sm btn-warning">Edit</a>
+                  <a href="<?= base_url('auditor/resiko/hapus_risiko/' . $r['kode_risiko']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data risiko ini?')">Hapus</a>
                 </td>
               </tr>
               <?php endforeach; ?>
@@ -86,7 +86,7 @@
 <div class="modal fade" id="modalTambahRisiko" tabindex="-1" aria-labelledby="modalTambahRisikoLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-      <form action="<?= base_url('auditor/simpan_risiko') ?>" method="post">
+      <form action="<?= base_url('auditor/resiko/simpan_risiko') ?>" method="post">
         <div class="modal-header">
           <h5 class="modal-title" id="modalTambahRisikoLabel">Tambah Data Risiko</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>

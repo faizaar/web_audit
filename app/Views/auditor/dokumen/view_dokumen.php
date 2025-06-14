@@ -129,63 +129,73 @@
     </div>
   </nav>
 
-
-  <!-- Table Card -->
-  <div class="card m-3">
-    <div class="card-header pb-0">
-      <h6>Data Audit</h6>
-    </div>
-    <div class="card-body px-0 pb-2">
-      <div class="table-responsive p-3" style="max-height: 500px; overflow-y: auto;">
-        <table class="table table-hover table-bordered align-items-center mb-0">
-          <thead class="bg-light">
-            <tr>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">No</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Jenis</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Nama Dokumen</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Deskripsi</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php if (!empty($dataMb)): ?>
-              <?php $no = 1 + (20 * ($currentPage - 1)); ?>
-              <?php foreach ($dataMb as $a): ?>
-                <tr>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0"><?= $no++ ?></p>
-                  </td>
-                  <td style="white-space: normal; word-wrap: break-word;">
-                    <p class="text-xs text-secondary mb-0"><?= $a['jenis'] ?></p>
-                  </td>
-                  <td style="white-space: normal; word-wrap: break-word;">
-                    <p class="text-xs text-secondary mb-0"><?= $a['nama'] ?></p>
-                  </td>
-                  <td style="white-space: normal; word-wrap: break-word;">
-                    <p class="text-xs text-secondary mb-0"><?= $a['deskripsi'] ?></p>
-                  </td>
-                  <td class="align-middle">
-                    <a href="<?= base_url('auditor/edit_dokumen/' . $a['id_dokumen']) ?>"
-                      class="btn btn-sm btn-warning">Edit</a>
-                    <a href="<?= base_url('auditor/hapus_dokumen/' . $a['id_dokumen']) ?>" class="btn btn-sm btn-danger"
-                      onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-                  </td>
-                </tr>
-              <?php endforeach; ?>
-            <?php else: ?>
+<!-- Table Card -->
+<div class="card m-3">
+  <div class="card-header pb-0">
+    <h6>Data Dokumen</h6>
+  </div>
+  <div class="card-body px-0 pb-2">
+    <div class="table-responsive p-3" style="max-height: 500px; overflow-y: auto;">
+      <table class="table table-hover table-bordered align-items-center mb-0">
+        <thead class="bg-light">
+          <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">No</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Kode Dokumen</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Jenis</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Nama Dokumen</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Deskripsi</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">File</th> <!-- Added File Column -->
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php if (!empty($dataMb)): ?>
+            <?php $no = 1 + (20 * ($currentPage - 1)); ?>
+            <?php foreach ($dataMb as $a): ?>
               <tr>
-                <td colspan="6" class="text-center text-secondary">Tidak ada data.</td>
+                <td>
+                  <p class="text-xs font-weight-bold mb-0"><?= $no++ ?></p>
+                </td>
+                <td>
+                  <p class="text-xs text-secondary mb-0"><?= $a['kode_dokumen'] ?></p>
+                </td>
+                <td style="white-space: normal; word-wrap: break-word;">
+                  <p class="text-xs text-secondary mb-0"><?= $a['jenis'] ?></p>
+                </td>
+                <td style="white-space: normal; word-wrap: break-word;">
+                  <p class="text-xs text-secondary mb-0"><?= $a['nama'] ?></p>
+                </td>
+                <td style="white-space: normal; word-wrap: break-word;">
+                  <p class="text-xs text-secondary mb-0"><?= $a['deskripsi'] ?></p>
+                </td>
+                <td>
+                  <!-- Check if the file exists and display it -->
+                  <?php if (!empty($a['file_path'])): ?>
+                    <a href="<?= base_url('uploads/dokumen/' . $a['file_path']) ?>" class="btn btn-sm btn-info" target="_blank">Lihat File</a>
+                  <?php else: ?>
+                    <p class="text-xs text-secondary mb-0">No file</p>
+                  <?php endif; ?>
+                </td>
+                <td class="align-middle">
+                  <a href="<?= base_url('auditor/edit_dokumen/' . $a['id_dokumen']) ?>" class="btn btn-sm btn-warning">Edit</a>
+                  <a href="<?= base_url('auditor/hapus_dokumen/' . $a['id_dokumen']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                </td>
               </tr>
-            <?php endif; ?>
-          </tbody>
-        </table>
-        <div class="d-flex justify-content-center mt-3">
-          <nav>
-            <ul class="pagination pagination-sm">
-              <?= $pager->links('dokumen', 'custom') ?>
-            </ul>
-          </nav>
-        </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <tr>
+              <td colspan="7" class="text-center text-secondary">Tidak ada data.</td> <!-- Adjusted colspan -->
+            </tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center mt-3">
+        <nav>
+          <ul class="pagination pagination-sm">
+            <?= $pager->links('dokumen', 'custom') ?>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
+</div>

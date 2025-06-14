@@ -123,3 +123,31 @@
       </div>
     </div>
   </div>
+
+  <form action="<?= isset($alat) ? base_url('auditor/alat/update_alat/' . $alat['id_alat']) : base_url('auditor/alat/store_alat') ?>" method="post">
+    <div class="form-group">
+        <label for="kode_alat">Kode Alat</label>
+        <input type="text" class="form-control" name="kode_alat" value="<?= isset($alat) ? $alat['kode_alat'] : '' ?>" required>
+    </div>
+    <div class="form-group">
+        <label for="nama_alat">Nama Alat</label>
+        <input type="text" class="form-control" name="nama_alat" value="<?= isset($alat) ? $alat['nama_alat'] : '' ?>" required>
+    </div>
+    <div class="form-group">
+        <label for="spesifikasi">Spesifikasi</label>
+        <textarea class="form-control" name="spesifikasi" required><?= isset($alat) ? $alat['spesifikasi'] : '' ?></textarea>
+    </div>
+    <div class="form-group">
+        <label for="disiapkan_oleh">Disiapkan Oleh</label>
+        <input type="text" class="form-control" name="disiapkan_oleh" value="<?= isset($alat) ? $alat['disiapkan_oleh'] : '' ?>" required>
+    </div>
+    <div class="form-group">
+        <label for="fungsi">Fungsi</label>
+        <textarea class="form-control" name="fungsi" required><?= isset($alat) ? $alat['fungsi'] : '' ?></textarea>
+    </div>
+    <div class="form-group">
+        <label for="id_auditee">ID Auditee</label>
+        <input type="text" class="form-control" name="id_auditee" value="<?= isset($alat) ? $alat['id_auditee'] : '' ?>" required>
+    </div>
+    <button type="submit" class="btn btn-primary"><?= isset($alat) ? 'Perbarui' : 'Simpan' ?></button>
+</form>

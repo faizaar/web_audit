@@ -77,6 +77,14 @@ $routes->get('auditor', 'auditor::view_auditor');
 $routes->get('auditor/alat', 'auditor::view_alat');
 $routes->get('auditor/audit', 'auditor::view_audit');
 
+
+$routes->get('auditor/alat/view_alat', 'AlatController::view_alat');
+$routes->get('auditor/alat/add_alat', 'AlatController::add_alat');
+$routes->post('auditor/alat/store_alat', 'AlatController::store_alat');
+$routes->get('auditor/alat/edit_alat/(:num)', 'AlatController::edit_alat/$1');
+$routes->post('auditor/alat/update_alat/(:num)', 'AlatController::update_alat/$1');
+$routes->get('auditor/alat/hapus_alat/(:num)', 'AlatController::delete_alat/$1');
+
 //RESIKO
 $routes->get('auditor/resiko', 'auditor::view_risiko');
 $routes->post('auditor/resiko/simpan_risiko', 'Auditor::simpan_risiko');

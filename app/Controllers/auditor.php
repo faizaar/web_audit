@@ -42,18 +42,77 @@ class auditor extends BaseController
     }
 
 
-    public function view_alat()
-    {
-        $model = new Model_alatauditor();
-        $data['dataMb'] = $model->paginate(20, 'alat'); // 20 data per halaman
-        $data['pager'] = $model->pager;
-        $data['currentPage'] = $model->pager->getCurrentPage('alat');
-
-        echo view('auditor/layout/auditor_header');
-        echo view('auditor/layout/auditor_nav');
-        echo view('auditor/alat/view_alat', $data);
-        echo view('auditor/layout/auditor_footer');
-    }
+        public function view_alat()
+        {
+            $model = new Model_alatauditor();
+            $data['dataMb'] = $model->paginate(20, 'alat');
+            $data['pager'] = $model->pager;
+            $data['currentPage'] = $model->pager->getCurrentPage('alat');
+            
+            echo view('auditor/layout/auditor_header');
+            echo view('auditor/layout/auditor_nav');
+            echo view('auditor/alat/view_alat', $data);
+            echo view('auditor/layout/auditor_footer');
+           // return view('auditor/alat/view_alat', $data);
+        }
+    
+        public function add_alat()
+        {
+            return view('auditor/alat/add_alat');
+        }
+    
+        public function store_alat()
+        {
+            $model = new Model_alatauditor();
+            
+            $data = [
+                'kode_alat' => $this->request->getPost('kode_alat'),
+                'nama_alat' => $this->request->getPost('nama_alat'),
+                'spesifikasi' => $this->request->getPost('spesifikasi'),
+                'disiapkan_oleh' => $this->request->getPost('disiapkan_oleh'),
+                'fungsi' => $this->request->getPost('fungsi'),
+                'id_auditee' => $this->request->getPost('id_auditee')
+            ];
+    
+            $model->insertAlat($data);
+    
+            return redirect()->to('/auditor/alat/view_alat');
+        }
+    
+        public function edit_alat($id)
+        {
+            $model = new Model_alatauditor();
+            $data['alat'] = $model->getAlatById($id);
+            
+            return view('auditor/alat/edit_alat', $data);
+        }
+    
+        public function update_alat($id)
+        {
+            $model = new Model_alatauditor();
+            
+            $data = [
+                'kode_alat' => $this->request->getPost('kode_alat'),
+                'nama_alat' => $this->request->getPost('nama_alat'),
+                'spesifikasi' => $this->request->getPost('spesifikasi'),
+                'disiapkan_oleh' => $this->request->getPost('disiapkan_oleh'),
+                'fungsi' => $this->request->getPost('fungsi'),
+                'id_auditee' => $this->request->getPost('id_auditee')
+            ];
+    
+            $model->updateAlat($id, $data);
+    
+            return redirect()->to('/auditor/alat/view_alat');
+        }
+    
+        public function delete_alat($id)
+        {
+            $model = new Model_alatauditor();
+            $model->deleteAlat($id);
+    
+            return redirect()->to('/auditor/alat/view_alat');
+        }
+    
 
     public function view_audit()
     {

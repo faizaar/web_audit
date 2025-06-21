@@ -15,7 +15,6 @@ class Model_alokasi extends Model
         'id_dokumen',
         'teknik_pengujian',
         'id_jadwal',
-        'id_auditor',
         'kode_alat',
         'penilaian_level',
     ];
@@ -36,7 +35,6 @@ class Model_alokasi extends Model
                 komponen_penilaian.indikator , 
                 dokumen.jenis, 
                 jadwal.nama_kegiatan, 
-                akun_auditor.nama AS nama_auditor, 
                 alat.nama_alat
             ')
             ->join('aset', 'aset.id_aset = alokasi.id_aset', 'left')
@@ -44,7 +42,6 @@ class Model_alokasi extends Model
             ->join('komponen_penilaian', 'komponen_penilaian.id_kontrol = alokasi.kode_kontrol', 'left')
             ->join('dokumen', 'dokumen.id_dokumen = alokasi.id_dokumen', 'left')
             ->join('jadwal', 'jadwal.id_kegiatan = alokasi.id_jadwal', 'left')
-            ->join('akun_auditor', 'akun_auditor.id_auditor = alokasi.id_auditor', 'left')
             ->join('alat', 'alat.id_alat = alokasi.kode_alat', 'left')
             ->findAll();
     }

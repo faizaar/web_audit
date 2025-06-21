@@ -418,7 +418,6 @@ public function hapus_komponen($id)
             'penilaian_level'      => $this->request->getPost('penilaian_level'),
             'teknik_pengujian'     => $this->request->getPost('teknik_pengujian'),
             'id_jadwal'            => $this->request->getPost('id_jadwal'),
-            'id_auditor'           => $this->request->getPost('id_auditor'),
             'kode_alat'            => $this->request->getPost('kode_alat'),
         ];
     
@@ -463,7 +462,6 @@ public function hapus_komponen($id)
         'id_dokumen'           => $this->request->getPost('id_dokumen'),
         'teknik_pengujian'     => $this->request->getPost('teknik_pengujian'),
         'id_jadwal'            => $this->request->getPost('id_jadwal'),
-        'id_auditor'           => $this->request->getPost('id_auditor'),
         'kode_alat'            => $this->request->getPost('kode_alat'),
     ];
 

@@ -23,7 +23,6 @@
               <th>Teknik Pengujian</th>
               <th>Penilaian Level</th>
               <th>Jadwal</th>
-              <th>Auditor</th>
               <th>Alat</th>
               <th>Aksi</th>
             </tr>
@@ -31,28 +30,26 @@
           <tbody>
             <?php foreach ($alokasi as $a): ?>
             <tr>
-              <td><?= esc($a['kode_alokasi']) ?></td>
-              <td><?= esc($a['kode_aset']) ?></td>
-              <td><?= esc($a['kode_risiko']) ?></td>
-              <td><?= esc($a['kode_kontrol']) ?></td>
-              <td><?= esc($a['id_dokumen']) ?></td>
-              <td><?= esc($a['teknik_pengujian']) ?></td>
-              <td><?= esc($a['penilaian_level']) ?></td>
-              <td><?= esc($a['id_jadwal']) ?></td>
-              <td><?= esc($a['id_auditor']) ?></td>
-              <td><?= esc($a['kode_alat']) ?></td>
+            <td><?= esc($a['kode_alokasi']) ?> </td>
+            <td><?= esc($a['id_aset']) ?> - <?= esc($a['nama_aset']) ?></td>
+            <td><?= esc($a['kode_risiko']) ?> - <?= esc($a['penyebab']) ?></td>
+            <td><?= esc($a['kode_kontrol']) ?> - <?= esc($a['indikator']) ?></td>
+            <td><?= esc($a['id_dokumen']) ?> - <?= esc($a['jenis']) ?></td>
+            <td><?= esc($a['teknik_pengujian']) ?> </td>
+            <td><?= esc($a['penilaian_level']) ?> </td>
+            <td><?= esc($a['id_jadwal']) ?> - <?= esc($a['nama_kegiatan']) ?></td>
+            <td><?= esc($a['kode_alat']) ?> - <?= esc($a['nama_alat']) ?></td>
               <td>
                 <!-- Tombol Edit untuk membuka modal update -->
                 <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateAlokasi" 
                    data-id="<?= esc($a['kode_alokasi']) ?>"
-                   data-kode_aset="<?= esc($a['kode_aset']) ?>"
+                   data-kode_aset="<?= esc($a['id_aset']) ?>"
                    data-kode_risiko="<?= esc($a['kode_risiko']) ?>"
                    data-kode_kontrol="<?= esc($a['kode_kontrol']) ?>"
                    data-id_dokumen="<?= esc($a['id_dokumen']) ?>"
                    data-teknik_pengujian="<?= esc($a['teknik_pengujian']) ?>"
                    data-penilaian_level="<?= esc($a['penilaian_level']) ?>"
                    data-id_jadwal="<?= esc($a['id_jadwal']) ?>"
-                   data-id_auditor="<?= esc($a['id_auditor']) ?>"
                    data-kode_alat="<?= esc($a['kode_alat']) ?>">
                     Edit
                 </a>
@@ -96,7 +93,7 @@
                 <select name="kode_risiko" class="form-select" required>
                   <option disabled selected>-- Pilih Risiko --</option>
                   <?php foreach ($risiko as $item): ?>
-                    <option value="<?= $item['kode_risiko'] ?>"><?= $item['kode_risiko'] ?></option>
+                    <option value="<?= $item['kode_risiko'] ?>"><?= $item['kode_risiko'] ?>- <?= $item['penyebab'] ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -123,16 +120,7 @@
                 <select name="id_jadwal" class="form-select" required>
                   <option disabled selected>-- Pilih Jadwal --</option>
                   <?php foreach ($jadwal as $item): ?>
-                    <option value="<?= $item['id_kegiatan'] ?>"><?= $item['id_kegiatan'] ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Auditor</label>
-                <select name="id_auditor" class="form-select" required>
-                  <option disabled selected>-- Pilih Auditor --</option>
-                  <?php foreach ($auditor as $item): ?>
-                    <option value="<?= $item['kode_auditor'] ?>"><?= $item['kode_auditor'] ?> - <?= $item['nama'] ?></option>
+                    <option value="<?= $item['id_kegiatan'] ?>"><?= $item['id_kegiatan'] ?> - <?= $item['nama_kegiatan'] ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -185,22 +173,76 @@
             <input type="hidden" name="kode_alokasi" id="update_kode_alokasi">
 
             <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label">Dokumentasi</label>
-                <input type="text" class="form-control" name="dokumentasi" id="update_dokumentasi" required>
-              </div>
+    <div class="col-md-6">
+      <label class="form-label">Aset</label>
+      <select name="id_aset" id="update_kode_aset" class="form-select" required>
+        <?php foreach ($aset as $item): ?>
+          <option value="<?= $item['id_aset'] ?>"><?= $item['id_aset'] ?> - <?= $item['nama_aset'] ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Penilaian Level</label>
-                <select name="penilaian_level" class="form-select" id="update_penilaian_level" required>
-                  <option disabled selected>-- Pilih Level --</option>
-                  <option value="1">Level 1</option>
-                  <option value="2">Level 2</option>
-                  <option value="3">Level 3</option>
-                  <option value="0">Belum Dinilai</option>
-                </select>
-              </div>
-            </div>
+    <div class="col-md-6">
+      <label class="form-label">Risiko</label>
+      <select name="kode_risiko" id="update_kode_risiko" class="form-select" required>
+        <?php foreach ($risiko as $item): ?>
+          <option value="<?= $item['kode_risiko'] ?>"><?= $item['kode_risiko'] ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Kontrol</label>
+      <select name="kode_kontrol" id="update_kode_kontrol" class="form-select" required>
+        <?php foreach ($kontrol as $item): ?>
+          <option value="<?= $item['id_kontrol'] ?>"><?= $item['id_kontrol'] ?> - <?= $item['indikator'] ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Dokumen</label>
+      <select name="id_dokumen" id="update_id_dokumen" class="form-select" required>
+        <?php foreach ($dokumen as $item): ?>
+          <option value="<?= $item['id_dokumen'] ?>"><?= $item['id_dokumen'] ?> - <?= $item['nama'] ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Jadwal</label>
+      <select name="id_jadwal" id="update_id_jadwal" class="form-select" required>
+        <?php foreach ($jadwal as $item): ?>
+          <option value="<?= $item['id_kegiatan'] ?>"><?= $item['id_kegiatan'] ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+
+    <div class="col-md-6">
+      <label class="form-label">Alat</label>
+      <select name="kode_alat" id="update_kode_alat" class="form-select" required>
+        <?php foreach ($alat as $item): ?>
+          <option value="<?= $item['id_alat'] ?>"><?= $item['id_alat'] ?> - <?= $item['nama_alat'] ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Penilaian Level</label>
+      <select name="penilaian_level" id="update_penilaian_level" class="form-select" required>
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+        <option value="0">Belum Dinilai</option>
+      </select>
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Teknik Pengujian</label>
+      <input type="text" class="form-control" name="teknik_pengujian" id="update_teknik_pengujian" required>
+    </div>
+  </div>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-danger">Update</button>
@@ -227,7 +269,6 @@
     var teknik_pengujian = button.data('teknik_pengujian');
     var dokumentasi = button.data('dokumentasi');
     var id_jadwal = button.data('id_jadwal');
-    var id_auditor = button.data('id_auditor');
     var kode_alat = button.data('kode_alat');
 
     // Isi form modal dengan data yang ada
@@ -239,7 +280,6 @@
     modal.find('#update_teknik_pengujian').val(teknik_pengujian);
     modal.find('#update_dokumentasi').val(dokumentasi);
     modal.find('#update_id_jadwal').val(id_jadwal);
-    modal.find('#update_id_auditor').val(id_auditor);
     modal.find('#update_kode_alat').val(kode_alat);
   });
 </script>

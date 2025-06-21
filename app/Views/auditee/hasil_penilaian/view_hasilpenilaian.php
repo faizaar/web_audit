@@ -22,8 +22,8 @@
                         <?php else: ?>
                             <?php foreach ($hasil_penilaian as $row): ?>
                                 <tr>
-                                    <td><?= esc($row['nama_aset']) ?></td>
-                                    <td><?= esc($row['penyebab']) ?></td>
+                                    <td><?= esc($row['aset']) ?></td>
+                                    <td><?= esc($row['risiko']) ?></td>
                                     <td><?= esc($row['indikator']) ?></td>
                                     <td><?= esc($row['level_terpenuhi']) ?></td>
                                 </tr>

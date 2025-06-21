@@ -151,7 +151,6 @@
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Level 2</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Level 3</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th>
->>>>>>> c5d1b21591cd36d6309f4f595a8f52de13bf3f5b
             </tr>
           </thead>
           <tbody>
@@ -191,7 +190,6 @@
                       class="btn btn-sm btn-warning">Edit</a>
                     <a href="<?= base_url('auditor/hapus_audit/' . $a['id_kontrol']) ?>" class="btn btn-sm btn-danger"
                       onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
->>>>>>> c5d1b21591cd36d6309f4f595a8f52de13bf3f5b
                   </td>
                 </tr>
               <?php endforeach; ?>

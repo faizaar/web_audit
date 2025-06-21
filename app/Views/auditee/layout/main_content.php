@@ -8,9 +8,9 @@
 </div>
 <!-- Card Info Start -->
 <div class="container py-5">
-    <div class="row g-4">
+    <div class="row g-4 justify-content-center">
         <!-- Dokumen Diunggah -->
-        <div class="col-md-3">
+        <div class="col-md-3 ">
             <div class="stat-box">
                 <div class="stat-icon"><i class="fas fa-file-upload fa-lg"></i></div>
                 <div class="stat-value"><?= $total_dokumen ?></div>
@@ -36,4 +36,38 @@
             </div>
         </div> -->
     </div>
+    <div class="card mt-4">
+        <div class="card-header">
+            <h6 class="mb-0">Frekuensi Risiko per Aset</h6>
+        </div>
+        <div class="card-body">
+            <canvas id="frekuensiChart" height="80"></canvas>
+        </div>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('frekuensiChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <?= json_encode(array_column($chart, 'nama_aset')) ?>,
+            datasets: [{
+                label: 'Total Frekuensi Risiko',
+                data: <?= json_encode(array_column($chart, 'total_frekuensi')) ?>,
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'Frekuensi' }
+                }
+            }
+        }
+    });
+</script>

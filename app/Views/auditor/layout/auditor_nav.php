@@ -10,7 +10,8 @@
   <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link active bg-gradient-dark text-white" href="<?= base_url('auditor') ?>">
+        <a class="nav-link <?= (uri_string() == 'auditor') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+         href="<?= base_url('auditor') ?>">
           <i class="material-symbols-rounded opacity-5">dashboard</i>
           <span class="nav-link-text ms-1">Dashboard</span>
         </a>
@@ -24,43 +25,50 @@
         </a>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/jadwal') ?>">
+        <a class="nav-link <?= (uri_string() == 'auditor/jadwal') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="<?= base_url('auditor/jadwal') ?>">
           <i class="material-symbols-rounded opacity-5">fact_check</i>
           <span class="nav-link-text ms-1">jadwal kegiatan</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/alat') ?>">
+        <a class="nav-link <?= (uri_string() == 'auditor/alat') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="<?= base_url('auditor/alat') ?>">
           <i class="material-symbols-rounded opacity-5">build</i>
           <span class="nav-link-text ms-1">Alat</span>
         </a>
       </li> 
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/aset') ?>">
+        <a class="nav-link <?= (uri_string() == 'auditor/aset') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="<?= base_url('auditor/aset') ?>">
           <i class="material-symbols-rounded opacity-5">category</i>
           <span class="nav-link-text ms-1">Aset</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/resiko') ?>">
+        <a class="nav-link <?= (uri_string() == 'auditor/resiko') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="<?= base_url('auditor/resiko') ?>">
           <i class="material-symbols-rounded opacity-5">warning</i>
           <span class="nav-link-text ms-1">Risiko</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/komponen') ?>">
+        <a class="nav-link <?= (uri_string() == 'auditor/komponen') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="<?= base_url('auditor/komponen') ?>">
           <i class="material-symbols-rounded opacity-5">checklist</i>
           <span class="nav-link-text ms-1">Komponen Penilaian</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/dokumen') ?>">
+        <a class="nav-link <?= (uri_string() == 'auditor/dokumen') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="<?= base_url('auditor/dokumen') ?>">
           <i class="material-symbols-rounded opacity-5">description</i>
           <span class="nav-link-text ms-1">Dokumen</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" href="<?= base_url('auditor/alokasi') ?>">
+        <a class="nav-link <?= (uri_string() == 'auditor/alokasi') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="<?= base_url('auditor/alokasi') ?>">
           <i class="material-symbols-rounded opacity-5">inventory</i>
           <span class="nav-link-text ms-1">Alokasi</span>
         </a>

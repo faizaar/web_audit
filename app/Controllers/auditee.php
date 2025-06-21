@@ -9,15 +9,18 @@ use App\Models\model_auditee;
 use App\Models\model_dokumenauditor;
 use App\Models\model_hasilpenilaian;
 use App\Models\model_jadwalauditor;
+use App\Models\model_risiko;
 use CodeIgniter\Session\Session;
 
 class auditee extends BaseController
 {
     public function view_auditee()
     {
-        $model = new model_hasilpenilaian();
-
+        
         $id = session()->get('id_auditee');
+        $model = new model_hasilpenilaian();
+        $modelRisiko = new model_risiko();
+        $chartData = $modelRisiko->getFrekuensiPerAset(); // Data untuk chart
         $model = new model_auditee();
         $dokumen = new model_dokumenauditor();
         $pending = new model_hasilpenilaian();
@@ -26,8 +29,9 @@ class auditee extends BaseController
             'auditee' => $model->getProfile($id), // Ambil data auditee
             'total_dokumen' => $dokumen->countAllDokumen(),
             // 'jumlah_belum_dinilai' => $pending->hitungJumlahBelumDinilai(),
+            'chart' => $chartData
         ];
-
+        
         echo view('auditee/layout/header');
         echo view('auditee/layout/main_content', $data);
         echo view('auditee/layout/footer');
@@ -151,10 +155,11 @@ class auditee extends BaseController
 
     public function form_aset()
     {
-        $id = session()->get('id_auditee'); // ambil dari session login
-        $model = new model_asetauditor();
+        $id = session()->get('id_auditee'); // ambil ID user dari session
 
-        $data['data'] = $model->tampilaset_byeid($id); // ✅ sesuai login
+        $model = new model_asetauditor();
+        $data['asetRisiko'] = $model->getAsetDenganRisiko($id);
+
 
         echo view('auditee/layout/header');
         echo view('auditee/aset/view_aset', $data);
@@ -163,23 +168,48 @@ class auditee extends BaseController
 
     public function save_aset()
     {
-        $model = new model_asetauditor();
-        $model->save([
-            'id_auditee' => session()->get('id_auditee'),
-            'kode_aset' => $this->request->getPost('kode_aset'),
+        $id_auditee = session()->get('id_auditee');
+
+        $modelAset = new model_asetauditor();
+        $modelRisiko = new model_risiko();
+
+        $kode_aset = $this->request->getPost('kode_aset');
+
+        // Simpan ke tabel aset
+        $modelAset->save([
+            'id_auditee' => $id_auditee,
+            'kode_aset' => $kode_aset,
             'nama_aset' => $this->request->getPost('nama_aset'),
             'jenis' => $this->request->getPost('jenis'),
             'deskripsi' => $this->request->getPost('deskripsi'),
             'kategori' => $this->request->getPost('kategori')
         ]);
 
+        // Simpan ke tabel risiko (jika diinput dari form)
+        $modelRisiko->save([
+            'kode_risiko' => uniqid('RISK_'), // atau pakai UUID, atau auto increment
+            'kode_aset' => $kode_aset,
+            'penyebab' => $this->request->getPost('penyebab'),
+            'dampak' => $this->request->getPost('dampak'),
+            'nilai_frekuensi' => $this->request->getPost('nilai_frekuensi'),
+        ]);
+
         return redirect()->to(base_url('auditee/aset'));
     }
 
+
     public function edit_aset($id_aset)
     {
-        $model = new model_asetauditor();
-        $data['aset'] = $model->getAsetById($id_aset);
+        $modelAset = new model_asetauditor();
+        $modelRisiko = new model_risiko();
+
+        $aset = $modelAset->getAsetById($id_aset);
+        $risiko = $modelRisiko->getByKodeAset($aset['kode_aset']); // Asumsikan ambil risiko berdasarkan kode_aset
+
+        $data = [
+            'aset' => $aset,
+            'risiko' => $risiko
+        ];
 
         echo view('auditor/layout/header');
         echo view('auditor/aset/view_aset', $data); // sesuaikan view utama aset
@@ -188,29 +218,55 @@ class auditee extends BaseController
 
     public function update_aset()
     {
-        $id = $this->request->getPost('id_aset');
+        $id_aset = $this->request->getPost('id_aset');
+        $kode_aset = $this->request->getPost('kode_aset');
 
-        $data = [
-            'kode_aset' => $this->request->getPost('kode_aset'),
+        $modelAset = new model_asetauditor();
+        $modelRisiko = new model_risiko();
+
+        $modelAset->updateaset($id_aset, [
+            'kode_aset' => $kode_aset,
             'nama_aset' => $this->request->getPost('nama_aset'),
             'jenis' => $this->request->getPost('jenis'),
             'deskripsi' => $this->request->getPost('deskripsi'),
             'kategori' => $this->request->getPost('kategori'),
-        ];
+        ]);
 
-        $model = new model_asetauditor();
-        $model->updateaset($id, $data);
+        $modelRisiko->updateByKodeAset($kode_aset, [
+            'kode_risiko' => uniqid('RISK_'), // atau pakai UUID, atau auto increment
+            'kode_aset' => $kode_aset,
+            'penyebab' => $this->request->getPost('penyebab'),
+            'dampak' => $this->request->getPost('dampak'),
+            'nilai_frekuensi' => $this->request->getPost('nilai_frekuensi'),
+        ]);
 
         return redirect()->to(base_url('auditee/aset'));
     }
+
 
     public function delete_aset($id_aset)
     {
-        $model = new model_asetauditor();
-        $model->delete($id_aset);
+        $modelAset = new model_asetauditor();
+        $modelRisiko = new model_risiko();
+
+        $aset = $modelAset->getAsetById($id_aset);
+
+        if (!$aset) {
+            return redirect()->back()->with('error', 'Data aset tidak ditemukan.');
+        }
+
+
+        $aset = $modelAset->getAsetById($id_aset);
+
+        // Hapus risiko terlebih dahulu berdasarkan kode_aset
+        $modelRisiko->deleteByKodeAset($aset['kode_aset']);
+
+        // Hapus aset
+        $modelAset->delete($id_aset);
 
         return redirect()->to(base_url('auditee/aset'));
     }
+
 
     public function form_alat()
     {
@@ -277,7 +333,7 @@ class auditee extends BaseController
 
     public function view_hasilpenilaian()
     {
-        
+
         // Load model jika belum ada di controller
         $model = new model_hasilpenilaian();
 

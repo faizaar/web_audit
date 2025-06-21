@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Models;
 use CodeIgniter\Model;
 
@@ -8,14 +8,14 @@ class model_risiko extends Model
     protected $returnType = 'array';
     protected $primaryKey = 'id_risiko';
     protected $allowedFields = [
-        'kode_risiko', 
-        'kode_aset', 
-        'penyebab', 
-        'dampak', 
-        'nilai_frekuensi', 
-        'nilai_risiko', 
-        'total_frekuensi_risiko', 
-        'mitigasi_penyebab', 
+        'kode_risiko',
+        'kode_aset',
+        'penyebab',
+        'dampak',
+        'nilai_frekuensi',
+        'nilai_risiko',
+        'total_frekuensi_risiko',
+        'mitigasi_penyebab',
         'mitigasi_dampak'
     ];
 
@@ -39,11 +39,16 @@ class model_risiko extends Model
 
     // Ambil data berdasarkan kode_risiko
     public function getRisikoById($kode_risiko)
-{
-    // Pastikan bahwa kode_risiko dicari sebagai string
-    return $this->where('kode_risiko', $kode_risiko)->first();
-}
+    {
+        // Pastikan bahwa kode_risiko dicari sebagai string
+        return $this->where('kode_risiko', $kode_risiko)->first();
+    }
 
+    public function tampilrisiko_byeaset($kode_aset)
+    {
+        $query = $this->db->query("SELECT * FROM risiko WHERE kode_aset = ?", [$kode_aset]);
+        return $query->getResultArray(); // ✅ harus array
+    }
 
     // Update data risiko
     public function updateData($kode_risiko, $data)
@@ -56,4 +61,30 @@ class model_risiko extends Model
     {
         return $this->delete($kode_risiko);
     }
+
+    public function getByKodeAset($kode_aset)
+    {
+        return $this->where('kode_aset', $kode_aset)->first();
+    }
+
+    public function updateByKodeAset($kode_aset, $data)
+    {
+        return $this->where('kode_aset', $kode_aset)->set($data)->update();
+    }
+
+    public function deleteByKodeAset($kode_aset)
+    {
+        return $this->where('kode_aset', $kode_aset)->delete();
+    }
+
+    public function getFrekuensiPerAset()
+    {
+        return $this->db->table('risiko r')
+            ->select('a.nama_aset, SUM(r.nilai_frekuensi) AS total_frekuensi')
+            ->join('aset a', 'a.kode_aset = r.kode_aset')
+            ->groupBy('a.nama_aset')
+            ->get()->getResultArray();
+    }
+
+
 }

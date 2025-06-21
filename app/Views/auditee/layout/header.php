@@ -53,7 +53,7 @@
                         <div class="dropdown-menu m-0">
                             <a href="<?= base_url('auditee/jadwal'); ?>" class="dropdown-item">Jadwal Audit</a>
                             <a href="<?= base_url('auditee/hasil_penilaian'); ?>" class="dropdown-item">Tanggapan Audit</a>
-                            <a href="testimonial.html" class="dropdown-item">Kosong</a> 
+                            <!-- <a href="testimonial.html" class="dropdown-item">Kosong</a>  -->
                         </div>
                     </div>
                     <div class="nav-item dropdown">

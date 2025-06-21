@@ -8,8 +8,8 @@ class model_asetauditor extends Model
     protected $primaryKey = 'id_aset';           // primary key
 
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $returnType = 'array';
+    protected $useSoftDeletes = false;
 
     protected $allowedFields = [
         'kode_aset',
@@ -31,7 +31,7 @@ class model_asetauditor extends Model
 
     public function getAsetById($id)
     {
-        return $this->where('kode_aset', $id)->first();
+        return $this->where('id_aset', $id)->first();
 
     }
 
@@ -40,6 +40,17 @@ class model_asetauditor extends Model
         $query = $this->db->query("SELECT * FROM aset WHERE id_auditee = ?", [$id_auditee]);
         return $query->getResultArray(); // ✅ harus array
     }
+
+    public function getAsetDenganRisiko($id_auditee)
+    {
+        return $this->db->table('aset')
+            ->select('aset.*, risiko.penyebab, risiko.dampak, risiko.nilai_frekuensi, risiko.nilai_risiko, risiko.total_frekuensi_risiko')
+            ->join('risiko', 'risiko.kode_aset = aset.kode_aset', 'left')
+            ->where('aset.id_auditee', $id_auditee)
+            ->get()
+            ->getResultArray();
+    }
+
     public function updateaset($id_aset, $data)
     {
         return $this->update($id_aset, $data);

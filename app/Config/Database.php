@@ -28,7 +28,7 @@ class Database extends Config
         'DSN'          => '',
         'hostname'     => 'localhost',
         'username'     => 'root',
-        'password'     => '',
+        'password'     => 'husna',
         'database'     => 'audit_data',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',

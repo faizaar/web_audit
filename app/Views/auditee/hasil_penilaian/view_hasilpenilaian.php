@@ -9,7 +9,9 @@
                     <thead class="table-light text-center">
                         <tr>
                             <th>Aset</th>
-                            <th>Risiko</th>
+                            <th>Mitigasi Penyebab</th>
+                            <th>Mitigasi Dampak</th>
+                            <th>Nilai Risiko</th>
                             <th>Indikator</th>
                             <th>Level Terpenuhi</th>
                         </tr>
@@ -17,13 +19,15 @@
                     <tbody>
                         <?php if (empty($hasil_penilaian)): ?>
                             <tr>
-                                <td colspan="5" class="text-center text-muted">Belum ada hasil penilaian.</td>
+                                <td colspan="6" class="text-center text-muted">Belum ada hasil penilaian.</td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($hasil_penilaian as $row): ?>
                                 <tr>
-                                    <td><?= esc($row['aset']) ?></td>
-                                    <td><?= esc($row['risiko']) ?></td>
+                                    <td><?= esc($row['nama_aset']) ?></td>
+                                    <td><?= esc($row['mitigasi_penyebab']) ?></td>
+                                    <td><?= esc($row['mitigasi_dampak']) ?></td>
+                                    <td><?= esc($row['nilai_risiko']) ?></td>
                                     <td><?= esc($row['indikator']) ?></td>
                                     <td><?= esc($row['level_terpenuhi']) ?></td>
                                 </tr>

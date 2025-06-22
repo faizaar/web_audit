@@ -6,7 +6,7 @@ class model_risiko extends Model
 {
     protected $table = 'risiko';
     protected $returnType = 'array';
-    protected $primaryKey = 'id_risiko';
+    protected $primaryKey = 'kode_risiko';
     protected $allowedFields = [
         'kode_risiko',
         'kode_aset',

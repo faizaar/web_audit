@@ -53,8 +53,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?= (uri_string() == 'auditor/komponen') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
-        href="<?= base_url('auditor/komponen') ?>">
+        <a class="nav-link <?= (uri_string() == 'auditor/komponen_penilaian') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="<?= base_url('auditor/komponen_penilaian') ?>">
           <i class="material-symbols-rounded opacity-5">checklist</i>
           <span class="nav-link-text ms-1">Komponen Penilaian</span>
         </a>

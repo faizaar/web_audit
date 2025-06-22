@@ -103,10 +103,10 @@ $routes->get('auditor/hapus_laporan/(:num)', 'Auditor::hapus_laporan/$1');
 $routes->get('auditor/aset', 'auditor::view_aset');
 
 // Komponen
-$routes->get('auditor/komponen', 'auditor::view_komponen');
-$routes->post('auditor/simpan_komponen', 'Auditor::simpan_komponen');
-$routes->post('auditor/update_komponen', 'Auditor::update_komponen');
-$routes->get('auditor/hapus_komponen/(:segment)', 'Auditor::hapus_komponen/$1');
+$routes->get('auditor/komponen_penilaian', 'auditor::view_komponenpenilaian');
+$routes->post('auditor/komponen_penilaian', 'Auditor::simpan_komponen');
+$routes->post('auditor/komponen_penilaian/update_komponen', 'Auditor::update_komponen');
+$routes->get('auditor/komponen_penilaian/hapus_komponen/(:segment)', 'Auditor::hapus_komponen/$1');
 
 $routes->get('auditor/dokumen', 'auditor::view_dokumen');
 

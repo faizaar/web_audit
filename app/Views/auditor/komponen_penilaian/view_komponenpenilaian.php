@@ -186,9 +186,22 @@
                     <p class="text-xs text-secondary mb-0"><?= $a['level_3'] ?></p>
                   </td>
                   <td class="align-middle">
-                    <a href="<?= base_url('auditor/edit_audit/' . $a['id_kontrol']) ?>"
-                      class="btn btn-sm btn-warning">Edit</a>
-                    <a href="<?= base_url('auditor/hapus_audit/' . $a['id_kontrol']) ?>" class="btn btn-sm btn-danger"
+                  <button type="button" 
+                    class="btn btn-sm btn-warning btnEditKomponen" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modalEdit"
+                    data-id="<?= $a['id_kontrol'] ?>"
+                     data-domain="<?= esc($a['domain']) ?>"
+                    data-tahapan="<?= esc($a['tahapan']) ?>"
+                    data-aktivitas="<?= esc($a['aktivitas']) ?>"
+                  data-indikator="<?= esc($a['indikator']) ?>"
+                   data-level1="<?= esc($a['level_1']) ?>"
+                     data-level2="<?= esc($a['level_2']) ?>"
+                    data-level3="<?= esc($a['level_3']) ?>">
+                     Edit
+                  </button>
+
+                    <a href="<?= base_url('auditor/komponen_penilaian/hapus_komponen/' . $a['id_kontrol']) ?>" class="btn btn-sm btn-danger"
                       onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
                   </td>
                 </tr>
@@ -215,7 +228,7 @@
   <!-- Modal Tambah -->
   <div class="modal fade" id="modalTambah" tabindex="-1">
     <div class="modal-dialog modal-lg">
-      <form action="<?= base_url('auditor/simpan_komponen') ?>" method="post" class="modal-content">
+      <form action="<?= base_url('auditor/komponen_penilaian') ?>" method="post" class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Tambah Komponen</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -264,7 +277,7 @@
   <!-- Modal Edit -->
   <div class="modal fade" id="modalEdit" tabindex="-1">
     <div class="modal-dialog modal-lg">
-      <form action="<?= base_url('auditor/update_komponen') ?>" method="post" class="modal-content">
+      <form action="<?= base_url('auditor/komponen_penilaian/update_komponen') ?>" method="post" class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Edit Komponen</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -308,7 +321,8 @@
   </div>
 
   <script>
-    document.querySelectorAll('.btnEditKomponen').forEach(btn => {
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btnEditKomponen').forEach(function (btn) {
       btn.addEventListener('click', function () {
         document.getElementById('edit_id_kontrol').value = this.dataset.id;
         document.getElementById('edit_domain').value = this.dataset.domain;
@@ -320,6 +334,8 @@
         document.getElementById('edit_level3').value = this.dataset.level3;
       });
     });
-  </script>
+  });
+</script>
+
 </main>
   </div>

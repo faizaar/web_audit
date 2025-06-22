@@ -228,12 +228,6 @@ public function hapus_jadwal($id_jadwal)
         $kode_risiko = $this->request->getPost('kode_risiko');
 
         $data = [
-            'kode_aset' => $this->request->getPost('kode_aset'),
-            'penyebab' => $this->request->getPost('penyebab'),
-            'dampak' => $this->request->getPost('dampak'),
-            'nilai_frekuensi' => $this->request->getPost('nilai_frekuensi'),
-            'nilai_risiko' => $this->request->getPost('nilai_risiko'),
-            'total_frekuensi_risiko' => $this->request->getPost('total_frekuensi_risiko'),
             'mitigasi_penyebab' => $this->request->getPost('mitigasi_penyebab'),
             'mitigasi_dampak' => $this->request->getPost('mitigasi_dampak'),
         ];
@@ -343,7 +337,7 @@ public function view_dokumen()
     }
 
     // View Komponen
-    public function view_komponen()
+    public function view_komponenpenilaian()
     {
         $model = new model_komponenauditor();
         $data['dataMb'] = $model->paginate(20, 'komponen'); // 20 data per halaman
@@ -362,7 +356,7 @@ public function view_dokumen()
     $data = $this->request->getPost();
     $model->insertKomponen($data);
 
-    return redirect()->to(base_url('auditor/komponen'));
+    return redirect()->to(base_url('auditor/komponen_penilaian'));
 }
 
 public function update_komponen()
@@ -373,14 +367,14 @@ public function update_komponen()
     unset($data['id_kontrol']); // jangan update primary key
 
     $model->updateKomponen($id, $data);
-    return redirect()->to(base_url('auditor/komponen'));
+    return redirect()->to(base_url('auditor/komponen_penilaian'));
 }
 
 public function hapus_komponen($id)
 {
     $model = new model_komponenauditor();
     $model->deleteKomponen($id);
-    return redirect()->to(base_url('auditor/komponen'));
+    return redirect()->to(base_url('auditor/komponen_penilaian'));
 }
 
 

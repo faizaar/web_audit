@@ -29,9 +29,9 @@
     <div class="card-body px-0 pb-2">
       <div class="d-flex justify-content-between align-items-center px-3 pb-3">
         <h6 class="mb-0">Daftar Risiko</h6>
-        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalTambahRisiko">
+        <!-- <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalTambahRisiko">
           <i class="material-symbols-rounded" style="vertical-align: middle;">add</i> Tambah Data Risiko
-        </button>
+        </button> -->
       </div>
 
       <!-- Tabel Risiko -->
@@ -59,7 +59,7 @@
                 <td><?= esc($r['kode_aset']) ?></td>
                 <td style="white-space: normal;"><?= esc($r['penyebab']) ?></td>
                 <td style="white-space: normal;"><?= esc($r['dampak']) ?></td>
-                <td><?= esc($r['nilai_frekuensi']) ?></td>
+                <td><?= esc($r['nilai_frekuensi']) ?></ td>
                 <td><?= esc($r['nilai_risiko']) ?></td>
                 <td><?= esc($r['total_frekuensi_risiko']) ?></td>
                 <td style="white-space: normal;"><?= esc($r['mitigasi_penyebab']) ?></td>
@@ -82,7 +82,7 @@
                       </div>
                       <div class="modal-body">
                         <div class="row g-3">
-                          <div class="col-md-6">
+                          <!-- <div class="col-md-6">
                             <label class="form-label">Kode Aset</label>
                             <select name="kode_aset" class="form-select" required>
                               <?php foreach ($aset as $a): ?>
@@ -111,7 +111,7 @@
                           <div class="col-md-4">
                             <label class="form-label">Total Frekuensi Risiko</label>
                             <input type="number" name="total_frekuensi_risiko" class="form-control" value="<?= esc($r['total_frekuensi_risiko']) ?>" required>
-                          </div>
+                          </div> -->
                           <div class="col-md-6">
                             <label class="form-label">Mitigasi Penyebab</label>
                             <textarea name="mitigasi_penyebab" class="form-control" required><?= esc($r['mitigasi_penyebab']) ?></textarea>

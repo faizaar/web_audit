@@ -1,3 +1,52 @@
+# Web Audit - CodeIgniter 4
+
+![Banner atau Screenshot Aplikasi](/public/img/image-readme/home.jpg)
+
+**Web Audit** adalah sistem manajemen audit internal berbasis web untuk perusahaan, dibangun dengan **CodeIgniter 4** sebagai proyek tugas kuliah. Aplikasi ini memfasilitasi proses penilaian aset/berkas dengan tiga role terpisah: Superadmin, Auditor, dan Auditee.
+
+---
+
+## 🎯 Fitur Utama
+
+### 👑 Role: Superadmin
+- Mengelola akun (buat/edit/hapus) Auditor & Auditee
+- Melihat laporan audit secara keseluruhan
+- Membuat kategori audit baru
+![Banner atau Screenshot Aplikasi](/public/img/image-readme/superadmin-dashboard.jpg)
+
+### 🔍 Role: Auditor
+- Menilai berkas & aset yang diupload Auditee
+- Memberikan rekomendasi perbaikan
+- Generate laporan hasil audit
+![Banner atau Screenshot Aplikasi](/public/img/image-readme/auditor-dashboard.jpg)
+
+### 📥 Role: Auditee
+- Mengupload dokumen & data aset yang akan diaudit
+- Melihat hasil penilaian dari Auditor
+- Menerima rekomendasi perbaikan
+![Banner atau Screenshot Aplikasi](/public/img/image-readme/auditee-dashboard.jpg)
+![Banner atau Screenshot Aplikasi](/public/img/image-readme/auditee-aset.jpg)
+
+---
+
+## 🛠️ Teknologi
+
+**Framework:**  
+![CodeIgniter 4](https://img.shields.io/badge/CodeIgniter-4.x-red?logo=codeigniter)
+
+**Frontend:**  
+- HTML5, CSS3, JavaScript
+- Bootstrap 5 *(jika digunakan)*
+
+**Backend:**  
+- PHP 8.1+
+- CodeIgniter 4 MVC
+
+**Database:**  
+- MySQL / PostgreSQL
+
+---
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?

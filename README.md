@@ -10,14 +10,11 @@
 
 ### 👑 Role: Superadmin
 - Mengelola akun (buat/edit/hapus) Auditor & Auditee
-- Melihat laporan audit secara keseluruhan
-- Membuat kategori audit baru
 ![Banner atau Screenshot Aplikasi](/public/img/image-readme/superadmin-dashboard.jpg)
 
 ### 🔍 Role: Auditor
 - Menilai berkas & aset yang diupload Auditee
 - Memberikan rekomendasi perbaikan
-- Generate laporan hasil audit
 ![Banner atau Screenshot Aplikasi](/public/img/image-readme/auditor-dashboard.jpg)
 
 ### 📥 Role: Auditee

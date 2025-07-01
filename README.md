@@ -26,24 +26,6 @@
 
 ---
 
-## 🛠️ Teknologi
-
-**Framework:**  
-![CodeIgniter 4](https://img.shields.io/badge/CodeIgniter-4.x-red?logo=codeigniter)
-
-**Frontend:**  
-- HTML5, CSS3, JavaScript
-- Bootstrap 5 *(jika digunakan)*
-
-**Backend:**  
-- PHP 8.1+
-- CodeIgniter 4 MVC
-
-**Database:**  
-- MySQL / PostgreSQL
-
----
-
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?

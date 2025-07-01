@@ -6,7 +6,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
           <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Jadwal</li>
+          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Temuan</li>
         </ol>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -120,162 +120,147 @@
       </div>
     </div>
   </nav>
-
-
-
   <!-- Table Card -->
   <div class="card m-3">
     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-      <h6>Data Jadwal Audit</h6>
-      <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addModal">Tambah Jadwal</button>
+      <h6>Data Temuan Audit</h6>
+      <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah">Tambah Temuan</button>
     </div>
     <div class="card-body px-0 pb-2">
       <div class="table-responsive p-3" style="max-height: 500px; overflow-y: auto;">
-        <!-- Tabel Data Jadwal -->
         <table class="table table-hover table-bordered align-items-center mb-0">
           <thead class="bg-light">
             <tr>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder">No</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Nama Kegiatan</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Hari & Tanggal</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Jam</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Target Luaran</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Kode Audit</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Temuan</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Rekomendasi</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th>
             </tr>
           </thead>
           <tbody>
-            <?php if (!empty($dataMb)): ?>
-              <?php $no = 1; ?>
-              <?php foreach ($dataMb as $j): ?>
+            <?php if (!empty($temuan)): ?>
+              <?php $no = 1;
+              foreach ($temuan as $row): ?>
                 <tr>
+                  <td><p class="text-xs font-weight-bold mb-0"><?= $no++ ?></p>
+                </td>
+                  <td><p class="text-xs text-secondary mb-0"><?= esc($row['kode_audit']) ?></p>
+                </td>
+                  <td><p class="text-xs text-secondary mb-0"><?= esc($row['temuan']) ?></p>
+                </td>
+                  <td><p class="text-xs text-secondary mb-0"><?= esc($row['rekomendasi']) ?></p>
+                </td>
                   <td>
-                    <p class="text-xs font-weight-bold mb-0">
-                      <?= $no++ ?>
-                  </td>
-                  </p>
-                  <td>
-                    <p class="text-xs text-secondary mb-0"><?= $j['nama_kegiatan'] ?>
-                  </td>
-                  </p>
-                  <td>
-                    <p class="text-xs text-secondary mb-0"><?= $j['hari_tanggal'] ?>
-                  </td>
-                  </p>
-                  <td>
-                    <p class="text-xs text-secondary mb-0"><?= $j['jam'] ?>
-                  </td>
-                  </p>
-                  <td>
-                    <p class="text-xs text-secondary mb-0"><?= $j['target_luaran'] ?>
-                  </td>
-                  </p>
-                  <td>
-                    <button class="btn btn-warning btn-sm btnEdit" data-bs-toggle="modal" data-bs-target="#modalEdit"
-                      data-id="<?= $j['id_kegiatan'] ?>" data-nama="<?= $j['nama_kegiatan'] ?>"
-                      data-hari="<?= $j['hari_tanggal'] ?>" data-jam="<?= $j['jam'] ?>" data-luaran="<?= $j['target_luaran'] ?>">
+                    <button class="btn btn-warning btn-sm btnEdit" data-id="<?= $row['id_temuan'] ?>"
+                      data-kode="<?= $row['kode_audit'] ?>" data-temuan="<?= $row['temuan'] ?>"
+                      data-rekom="<?= $row['rekomendasi'] ?>" data-bs-toggle="modal" data-bs-target="#modalEdit">
                       Edit
                     </button>
-                    <a href="<?= base_url('auditor/hapus_jadwal/' . $j['id_kegiatan']) ?>" class="btn btn-danger btn-sm"
-                      onclick="return confirm('Yakin ingin menghapus jadwal ini?')">Hapus</a>
+                    <a href="<?= base_url('auditor/hasil_temuan/hapus/' . $row['id_temuan']) ?>"
+                      class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
                   </td>
                 </tr>
-              <?php endforeach; ?>
+              <?php endforeach ?>
             <?php else: ?>
               <tr>
-                <td colspan="6" class="text-center text-secondary">Tidak ada data.</td>
+                <td colspan="5" class="text-center text-secondary">Tidak ada data temuan.</td>
               </tr>
-            <?php endif; ?>
+            <?php endif ?>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <!-- Modal untuk Tambah Jadwal -->
-  <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <!-- Modal Tambah Temuan -->
+  <div class="modal fade" id="modalTambah" tabindex="-1">
     <div class="modal-dialog">
-      <form action="<?= base_url('auditor/tambah_jadwal') ?>" method="post">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="addModalLabel">Tambah Jadwal Audit</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="id_kegiatan" class="form-label">ID Kegiatan</label>
-              <input type="text" class="form-control" id="id_kegiatan" name="id_kegiatan" required>
-            </div>
-            <div class="mb-3">
-              <label for="nama_kegiatan" class="form-label">Nama Kegiatan</label>
-              <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" required>
-            </div>
-            <div class="mb-3">
-              <label for="hari_tanggal" class="form-label">Hari / Tanggal</label>
-              <input type="date" class="form-control" id="hari_tanggal" name="hari_tanggal" required>
-            </div>
-            <div class="mb-3">
-              <label for="jam" class="form-label">Jam</label>
-              <input type="time" class="form-control" id="jam" name="jam" required>
-            </div>
-            <div class="mb-3">
-              <label for="target_luaran" class="form-label">Target Luaran</label>
-              <input type="text" class="form-control" id="target_luaran" name="target_luaran" required>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal untuk Edit Jadwal -->
-  <!-- Modal Edit Jadwal -->
-  <div class="modal fade" id="modalEdit" tabindex="-1">
-    <div class="modal-dialog">
-      <form action="<?= base_url('auditor/edit_jadwal') ?>" method="post" class="modal-content">
+      <form action="<?= base_url('auditor/hasil_temuan/tambah') ?>" method="post" class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Edit Jadwal</h5>
+          <h5 class="modal-title">Tambah Temuan Audit</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <input type="hidden" name="id_jadwal" id="edit_id_jadwal">
           <div class="mb-3">
-            <label>Nama Kegiatan</label>
-            <input type="text" class="form-control" name="nama_kegiatan" id="edit_nama_kegiatan" required>
+            <label for="kode_audit" class="form-label">Kode Audit</label>
+            <select class="form-select" name="kode_audit" required>
+              <option value="">-- Pilih Kode Audit --</option>
+              <option value="Audit Perencanaan Teknologi Informasi">Audit Perencanaan Teknologi Informasi</option>
+              <option value="Audit Pengembangan Teknologi Informasi">Audit Pengembangan Teknologi Informasi</option>
+              <option value="Audit Operasional Teknologi Informasi">Audit Operasional Teknologi Informasi</option>
+              <option value="Audit Pemantauan Teknologi Informasi">Audit Pemantauan Teknologi Informasi</option>
+              <option value="Audit Aplikasi Teknologi Informasi">Audit Aplikasi Teknologi Informasi</option>
+              <option value="Audit Atas Infrastruktur Teknologi Informasi">Audit Atas Infrastruktur Teknologi Informasi
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="temuan" class="form-label">Temuan</label>
+            <textarea class="form-control" name="temuan" rows="3" required></textarea>
           </div>
           <div class="mb-3">
-            <label>Hari & Tanggal</label>
-            <input type="date" class="form-control" name="hari_tanggal" id="edit_hari_tanggal" required>
-          </div>
-          <div class="mb-3">
-            <label>Jam</label>
-            <input type="text" class="form-control" name="jam" id="edit_jam" required>
-          </div>
-          <div class="mb-3">
-            <label>Target Luaran</label>
-            <input type="text" class="form-control" name="target_luaran" id="edit_target_luaran" required>
+            <label for="rekomendasi" class="form-label">Rekomendasi</label>
+            <textarea class="form-control" name="rekomendasi" rows="3" required></textarea>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
         </div>
       </form>
     </div>
   </div>
 
+  <!-- Modal Edit Temuan -->
+  <div class="modal fade" id="modalEdit" tabindex="-1">
+    <div class="modal-dialog">
+      <form action="<?= base_url('auditor/hasil_temuan/edit') ?>" method="post" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Temuan Audit</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="id_temuan" id="edit_id_temuan">
+          <select class="form-select" name="kode_audit" id="edit_kode_audit" required>
+            <option value="">-- Pilih Kode Audit --</option>
+            <option value="Audit Perencanaan Teknologi Informasi">Audit Perencanaan Teknologi Informasi</option>
+            <option value="Audit Pengembangan Teknologi Informasi">Audit Pengembangan Teknologi Informasi</option>
+            <option value="Audit Operasional Teknologi Informasi">Audit Operasional Teknologi Informasi</option>
+            <option value="Audit Pemantauan Teknologi Informasi">Audit Pemantauan Teknologi Informasi</option>
+            <option value="Audit Aplikasi Teknologi Informasi">Audit Aplikasi Teknologi Informasi</option>
+            <option value="Audit Atas Infrastruktur Teknologi Informasi">Audit Atas Infrastruktur Teknologi Informasi
+            </option>
+          </select>
+
+          <div class="mb-3">
+            <label for="edit_temuan" class="form-label">Temuan</label>
+            <textarea class="form-control" name="temuan" id="edit_temuan" rows="3" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="edit_rekomendasi" class="form-label">Rekomendasi</label>
+            <textarea class="form-control" name="rekomendasi" id="edit_rekomendasi" rows="3" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-warning">Update</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS to fill modal edit -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const editButtons = document.querySelectorAll(".btnEdit");
+    document.addEventListener('DOMContentLoaded', function () {
+      const editButtons = document.querySelectorAll('.btnEdit');
       editButtons.forEach(btn => {
-        btn.addEventListener("click", function () {
-          document.getElementById("edit_id_jadwal").value = this.dataset.id;
-          document.getElementById("edit_nama_kegiatan").value = this.dataset.nama;
-          document.getElementById("edit_hari_tanggal").value = this.dataset.hari;
-          document.getElementById("edit_jam").value = this.dataset.jam;
-          document.getElementById("edit_target_luaran").value = this.dataset.luaran;
+        btn.addEventListener('click', function () {
+          document.getElementById('edit_id_temuan').value = this.dataset.id;
+          document.getElementById('edit_kode_audit').value = this.dataset.kode;
+          document.getElementById('edit_temuan').value = this.dataset.temuan;
+          document.getElementById('edit_rekomendasi').value = this.dataset.rekom;
         });
       });
     });

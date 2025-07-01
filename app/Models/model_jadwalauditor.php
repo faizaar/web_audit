@@ -8,23 +8,24 @@ class model_jadwalauditor extends Model
     protected $primaryKey = 'id_kegiatan';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $useSoftDeletes = false; 
-    protected $allowedFields = [  
-            'id_kegiatan',
-            'nama_kegiatan',
-            'hari_tanggal',
-            'jam',
-            'target_luaran',
-            'id_auditee'
-        ];
+    protected $useSoftDeletes = false;
+    protected $allowedFields = [
+        'id_kegiatan',
+        'nama_kegiatan',
+        'hari_tanggal',
+        'jam',
+        'target_luaran',
+        'id_auditee'
+    ];
     protected $useTimestamps = false;
 
 
     function tampiljadwal()
     {
-        $dataquery = $this->db->query("select * from jadwal");
-        return $dataquery->getResult();
+        $dataquery = $this->db->query("SELECT * FROM jadwal");
+        return $dataquery->getResultArray(); // hasil dalam bentuk array
     }
+
 
     public function getJadwalById($id)
     {

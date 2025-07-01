@@ -1,3 +1,4 @@
+<!-- Table Card -->
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur"
     data-scroll="true">
@@ -5,7 +6,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
           <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dokumen</li>
         </ol>
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -16,15 +17,6 @@
           </div>
         </div>
         <ul class="navbar-nav d-flex align-items-center  justify-content-end">
-          <li class="nav-item d-flex align-items-center">
-            <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank"
-              href="https://www.creative-tim.com/builder?ref=navbar-material-dashboard">Online Builder</a>
-          </li>
-          <li class="mt-1">
-            <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard"
-              data-icon="octicon-star" data-size="large" data-show-count="true"
-              aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
-          </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
               <div class="sidenav-toggler-inner">
@@ -129,75 +121,76 @@
     </div>
   </nav>
 
-<!-- Table Card -->
-<div class="card m-3">
-  <div class="card-header pb-0">
-    <h6>Data Dokumen</h6>
-  </div>
-  <div class="card-body px-0 pb-2">
-    <div class="table-responsive p-3" style="max-height: 500px; overflow-y: auto;">
-      <table class="table table-hover table-bordered align-items-center mb-0">
-        <thead class="bg-light">
-          <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">No</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Kode Dokumen</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Jenis</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Nama Dokumen</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Deskripsi</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">File</th> <!-- Added File Column -->
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if (!empty($dataMb)): ?>
-            <?php $no = 1 + (20 * ($currentPage - 1)); ?>
-            <?php foreach ($dataMb as $a): ?>
-              <tr>
-                <td>
-                  <p class="text-xs font-weight-bold mb-0"><?= $no++ ?></p>
-                </td>
-                <td>
-                  <p class="text-xs text-secondary mb-0"><?= $a['kode_dokumen'] ?></p>
-                </td>
-                <td style="white-space: normal; word-wrap: break-word;">
-                  <p class="text-xs text-secondary mb-0"><?= $a['jenis'] ?></p>
-                </td>
-                <td style="white-space: normal; word-wrap: break-word;">
-                  <p class="text-xs text-secondary mb-0"><?= $a['nama'] ?></p>
-                </td>
-                <td style="white-space: normal; word-wrap: break-word;">
-                  <p class="text-xs text-secondary mb-0"><?= $a['deskripsi'] ?></p>
-                </td>
-                <td>
-                  <!-- Check if the file exists and display it -->
-                  <?php if (!empty($a['file'])): ?>
-                      <a href="<?= base_url('uploads/dokumen/' . $a['file']) ?>" 
-                      class="btn btn-sm btn-info" 
-                      download="<?= $a['file'] ?>">Download</a>
-                      <?php else: ?>
-                      <p class="text-xs text-secondary mb-0">No file</p>
-                  <?php endif; ?>
-                </td>
-                <td class="align-middle">
-                  <a href="<?= base_url('auditor/edit_dokumen/' . $a['id_dokumen']) ?>" class="btn btn-sm btn-warning">Edit</a>
-                  <a href="<?= base_url('auditor/hapus_dokumen/' . $a['id_dokumen']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          <?php else: ?>
+  <!-- Table Card -->
+  <div class="card m-3">
+    <div class="card-header pb-0">
+      <h6>Data Dokumen</h6>
+    </div>
+    <div class="card-body px-0 pb-2">
+      <div class="table-responsive p-3" style="max-height: 500px; overflow-y: auto;">
+        <table class="table table-hover table-bordered align-items-center mb-0">
+          <thead class="bg-light">
             <tr>
-              <td colspan="7" class="text-center text-secondary">Tidak ada data.</td> <!-- Adjusted colspan -->
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">No</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Kode Dokumen</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Jenis</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Nama Dokumen</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Deskripsi</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder">File</th> <!-- Added File Column -->
+              <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Aksi</th> -->
             </tr>
-          <?php endif; ?>
-        </tbody>
-      </table>
-      <div class="d-flex justify-content-center mt-3">
-        <nav>
-          <ul class="pagination pagination-sm">
-            <?= $pager->links('dokumen', 'custom') ?>
-          </ul>
-        </nav>
+          </thead>
+          <tbody>
+            <?php if (!empty($dataMb)): ?>
+              <?php $no = 1 + (20 * ($currentPage - 1)); ?>
+              <?php foreach ($dataMb as $a): ?>
+                <tr>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0"><?= $no++ ?></p>
+                  </td>
+                  <td>
+                    <p class="text-xs text-secondary mb-0"><?= $a['kode_dokumen'] ?></p>
+                  </td>
+                  <td style="white-space: normal; word-wrap: break-word;">
+                    <p class="text-xs text-secondary mb-0"><?= $a['jenis'] ?></p>
+                  </td>
+                  <td style="white-space: normal; word-wrap: break-word;">
+                    <p class="text-xs text-secondary mb-0"><?= $a['nama'] ?></p>
+                  </td>
+                  <td style="white-space: normal; word-wrap: break-word;">
+                    <p class="text-xs text-secondary mb-0"><?= $a['deskripsi'] ?></p>
+                  </td>
+                  <td>
+                    <!-- Check if the file exists and display it -->
+                    <?php if (!empty($a['file'])): ?>
+                      <a href="<?= base_url('uploads/dokumen/' . $a['file']) ?>" class="btn btn-sm btn-info"
+                        download="<?= $a['file'] ?>">Download</a>
+                    <?php else: ?>
+                      <p class="text-xs text-secondary mb-0">No file</p>
+                    <?php endif; ?>
+                  </td>
+                  <!-- <td class="align-middle">
+                    <a href="<?= base_url('auditor/edit_dokumen/' . $a['id_dokumen']) ?>"
+                      class="btn btn-sm btn-warning">Edit</a>
+                    <a href="<?= base_url('auditor/hapus_dokumen/' . $a['id_dokumen']) ?>" class="btn btn-sm btn-danger"
+                      onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                  </td> -->
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="7" class="text-center text-secondary">Tidak ada data.</td> <!-- Adjusted colspan -->
+              </tr>
+            <?php endif; ?>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center mt-3">
+          <nav>
+            <ul class="pagination pagination-sm">
+              <?= $pager->links('dokumen', 'custom') ?>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
-</div>

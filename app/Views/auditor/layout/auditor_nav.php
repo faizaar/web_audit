@@ -2,8 +2,8 @@
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="navbar-brand px-4 py-3 m-0" href="https://demos.creative-tim.com/material-dashboard/pages/dashboard" target="_blank">
-      <img src="../../assets/img/logo-ct-dark.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
-      <span class="ms-1 text-sm text-dark">Super Admin</span>
+      <img src="../../assets/img/logo-audit.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
+      <span class="ms-1 text-sm text-dark">Auditor</span>
     </a>
   </div>
   <hr class="horizontal dark mt-0 mb-2">
@@ -73,7 +73,13 @@
           <span class="nav-link-text ms-1">Alokasi</span>
         </a>
       </li>
-
+      <li class="nav-item">
+        <a class="nav-link <?= (uri_string() == 'auditor/hasil_temuan') ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+        href="<?= base_url('auditor/hasil_temuan') ?>">
+          <i class="material-symbols-rounded opacity-5">verified</i>
+          <span class="nav-link-text ms-1">Temuan</span>
+        </a>
+      </li>
       <!-- Akun & Auth -->
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Account Pages</h6>

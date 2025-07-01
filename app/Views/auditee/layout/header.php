@@ -39,17 +39,18 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <?php $uri = service('uri'); ?>
                 <div class="navbar-nav mx-auto py-0">
-                    <a href="<?= base_url('auditee/dashboard'); ?>" class="nav-item nav-link active">Home</a>
+                    <a href="<?= base_url('auditee/dashboard'); ?>" class="nav-item nav-link <?= $uri->getSegment(2) === 'dashboard' ? 'active' : '' ?>">Home</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Akun</a>
+                        <a href="#" class="nav-link dropdown-toggle <?= in_array($uri->getSegment(2), ['profile', 'logout']) ? 'active' : '' ?>" data-toggle="dropdown" data-toggle="dropdown">Akun</a>
                         <div class="dropdown-menu m-0">
                             <a href="<?= base_url('auditee/profile'); ?>" class="dropdown-item">Profile</a>
                             <a href="<?= base_url('auditee/logout'); ?>" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Audit</a>
+                        <a href="#" class="nav-link dropdown-toggle <?= in_array($uri->getSegment(2), ['jadwal', 'hasil_penilaian']) ? 'active' : '' ?>" data-toggle="dropdown" data-toggle="dropdown">Audit</a>
                         <div class="dropdown-menu m-0">
                             <a href="<?= base_url('auditee/jadwal'); ?>" class="dropdown-item">Jadwal Audit</a>
                             <a href="<?= base_url('auditee/hasil_penilaian'); ?>" class="dropdown-item">Tanggapan Audit</a>
@@ -57,7 +58,7 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Data</a>
+                        <a href="#" class="nav-link dropdown-toggle <?= in_array($uri->getSegment(2), ['aset', 'dokumen']) ? 'active' : '' ?>" data-toggle="dropdown" data-toggle="dropdown">Data</a>
                         <div class="dropdown-menu m-0">
                             <a href="<?= base_url('auditee/aset'); ?>" class="dropdown-item">Data Aset</a>
                             <a href="<?= base_url('auditee/dokumen'); ?>" class="dropdown-item">Data Dokumen</a>

@@ -9,40 +9,57 @@ use App\Models\model_auditee;
 use App\Models\model_dokumenauditor;
 use App\Models\model_hasilpenilaian;
 use App\Models\model_jadwalauditor;
+use App\Models\model_maturity;
 use App\Models\model_risiko;
+use App\Models\model_temuan;
+use App\Models\model_auditauditor;
 use CodeIgniter\Session\Session;
 
 class auditee extends BaseController
 {
     public function view_auditee()
     {
-        
         $id = session()->get('id_auditee');
-        $model = new model_hasilpenilaian();
-        $modelRisiko = new model_risiko();
-        $chartData = $modelRisiko->getFrekuensiPerAset(); // Data untuk chart
+
         $model = new model_auditee();
         $dokumen = new model_dokumenauditor();
         $pending = new model_hasilpenilaian();
-        $id = session()->get('auditee_id'); // Ambil dari session
+        $modelRisiko = new model_risiko();
+        $modelNilai = new model_hasilpenilaian(); // Untuk radar chart
+
+        $chartData = $modelRisiko->getFrekuensiPerAset(); // Bar chart data
+
+        // Dapatkan rata-rata skor per jenis audit
+        $modelNilai = new model_maturity();
+        $modelaudit = new model_auditauditor();
+        $maturity = $modelNilai->getRataRataPerJenisAudit();
+        $gapAnalysis = $modelNilai->getGapAnalysis();
+        $audit = $modelaudit->tampilaudit();
+
         $data = [
-            'auditee' => $model->getProfile($id), // Ambil data auditee
+            'auditee' => $model->getProfile($id),
             'total_dokumen' => $dokumen->countAllDokumen(),
-            // 'jumlah_belum_dinilai' => $pending->hitungJumlahBelumDinilai(),
-            'chart' => $chartData
+            'chart' => $chartData,
+            'maturity' => $maturity, // dikirim ke view
+            'audit' => $audit, // dikirim ke view
+            'gap' => $gapAnalysis,
+            'tabelMaturityLevel' => $modelNilai->getTabelMaturityLevel(),
+            'tabelMaturityLevelGAP' => $modelNilai->getTabelMaturityLevelGAP(),
+            'AVGLevelGAP' => $modelNilai->getAVGLevelGAP(),
         ];
-        
+
         echo view('auditee/layout/header');
         echo view('auditee/layout/main_content', $data);
         echo view('auditee/layout/footer');
     }
 
 
+
     public function view_jadwal()
     {
         $id = session()->get('id_auditee');
         $mb = new model_jadwalauditor();
-        $data['dataMb'] = $mb->tampilJadwal_byid($id);
+        $data['dataMb'] = $mb->tampiljadwal($id);
 
         echo view('auditee/layout/header');
         echo view('auditee/jadwal/view_jadwal', $data);
@@ -108,8 +125,6 @@ class auditee extends BaseController
 
         return redirect()->to(base_url('auditee/dokumen'));
     }
-
-
 
     public function edit_dokumen($id_dokumen)
     {
@@ -186,7 +201,7 @@ class auditee extends BaseController
         ]);
 
         // Simpan ke tabel risiko (jika diinput dari form)
-        $modelRisiko->save([
+        $modelRisiko->insertData([
             'kode_risiko' => uniqid('RISK_'), // atau pakai UUID, atau auto increment
             'kode_aset' => $kode_aset,
             'penyebab' => $this->request->getPost('penyebab'),
@@ -335,10 +350,15 @@ class auditee extends BaseController
     {
 
         // Load model jika belum ada di controller
-        $model = new model_hasilpenilaian();
+        $modelhasilpenilaian = new model_hasilpenilaian();
+        $modelhasiltemuan = new model_temuan();
 
         // Ambil data hasil penilaian dari model
-        $data['hasil_penilaian'] = $model->getHasilPenilaian();
+        // $data['hasil_penilaian'] = $modelhasilpenilaian->getHasilPenilaian();
+        $data = [
+            'hasil_penilaian' => $modelhasilpenilaian->getHasilPenilaian(),
+            'hasil_temuan' => $modelhasiltemuan->getHasilTemuan()
+        ];
 
         // Tampilkan hasil penilaian di view
         echo view('auditee/layout/header');

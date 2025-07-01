@@ -11,6 +11,7 @@ use App\Models\Model_risiko;
 use App\Models\model_jadwalauditor;
 use App\Models\Model_laporan_hasil;
 use App\Models\Model_alokasi;
+use App\Models\model_temuan;
 use App\Models\model_auditor;
 
 class auditor extends BaseController
@@ -127,42 +128,42 @@ class auditor extends BaseController
         echo view('auditor/layout/auditor_footer');
     }
     public function tambah_jadwal()
-{
-    $data = [
-        'id_kegiatan'    => $this->request->getPost('id_kegiatan'),
-        'nama_kegiatan' => $this->request->getPost('nama_kegiatan'),
-        'hari_tanggal'  => $this->request->getPost('hari_tanggal'),
-        'jam'            => $this->request->getPost('jam'),
-        'target_luaran' => $this->request->getPost('target_luaran'),
-        'id_auditee'     => session()->get('id_auditee')  // Sesuaikan dengan ID Auditee
-    ];
+    {
+        $data = [
+            'id_kegiatan' => $this->request->getPost('id_kegiatan'),
+            'nama_kegiatan' => $this->request->getPost('nama_kegiatan'),
+            'hari_tanggal' => $this->request->getPost('hari_tanggal'),
+            'jam' => $this->request->getPost('jam'),
+            'target_luaran' => $this->request->getPost('target_luaran'),
+            'id_auditee' => session()->get('id_auditee')  // Sesuaikan dengan ID Auditee
+        ];
 
-    $mb = new model_jadwalauditor();
-    $mb->insert($data);
-    return redirect()->to(base_url('auditor/jadwal'));
-}
+        $mb = new model_jadwalauditor();
+        $mb->insert($data);
+        return redirect()->to(base_url('auditor/jadwal'));
+    }
 
-public function edit_jadwal()
-{
-    $id_jadwal = $this->request->getPost('id_jadwal');
-    $data = [
-        'nama_kegiatan' => $this->request->getPost('nama_kegiatan'),
-        'hari_tanggal'  => $this->request->getPost('hari_tanggal'),
-        'jam'            => $this->request->getPost('jam'),
-        'target_luaran' => $this->request->getPost('target_luaran')
-    ];
+    public function edit_jadwal()
+    {
+        $id_jadwal = $this->request->getPost('id_jadwal');
+        $data = [
+            'nama_kegiatan' => $this->request->getPost('nama_kegiatan'),
+            'hari_tanggal' => $this->request->getPost('hari_tanggal'),
+            'jam' => $this->request->getPost('jam'),
+            'target_luaran' => $this->request->getPost('target_luaran')
+        ];
 
-    $mb = new model_jadwalauditor();
-    $mb->update($id_jadwal, $data);
-    return redirect()->to(base_url('auditor/jadwal'));
-}
+        $mb = new model_jadwalauditor();
+        $mb->update($id_jadwal, $data);
+        return redirect()->to(base_url('auditor/jadwal'));
+    }
 
-public function hapus_jadwal($id_jadwal)
-{
-    $mb = new model_jadwalauditor();
-    $mb->delete($id_jadwal);
-    return redirect()->to(base_url('auditor/jadwal'));
-}
+    public function hapus_jadwal($id_jadwal)
+    {
+        $mb = new model_jadwalauditor();
+        $mb->delete($id_jadwal);
+        return redirect()->to(base_url('auditor/jadwal'));
+    }
 
     //CONTROLLER RESIKO 
 
@@ -173,7 +174,7 @@ public function hapus_jadwal($id_jadwal)
 
         $data = [
             'dataMb' => $risikoModel->tampilRisiko(),
-            'aset'   => $asetModel->findAll()
+            'aset' => $asetModel->findAll()
         ];
 
         echo view('auditor/layout/auditor_header');
@@ -196,6 +197,8 @@ public function hapus_jadwal($id_jadwal)
             'total_frekuensi_risiko' => $this->request->getPost('total_frekuensi_risiko'),
             'mitigasi_penyebab' => $this->request->getPost('mitigasi_penyebab'),
             'mitigasi_dampak' => $this->request->getPost('mitigasi_dampak'),
+            'skor' => $this->request->getPost('skor'),
+            'audit' => $this->request->getPost('audit'),
         ];
 
         $model->insertData($data);
@@ -209,7 +212,7 @@ public function hapus_jadwal($id_jadwal)
 
         $data = [
             'risiko' => $model->getRisikoById($kode_risiko),
-            'aset'   => $asetModel->findAll()
+            'aset' => $asetModel->findAll()
         ];
 
         if (!$data['risiko']) {
@@ -228,6 +231,8 @@ public function hapus_jadwal($id_jadwal)
         $kode_risiko = $this->request->getPost('kode_risiko');
 
         $data = [
+            // 'nilai_risiko' => $this->request->getPost('nilai_risiko'),
+            // 'total_frekuensi_risiko' => $this->request->getPost('total_frekuensi_risiko'),
             'mitigasi_penyebab' => $this->request->getPost('mitigasi_penyebab'),
             'mitigasi_dampak' => $this->request->getPost('mitigasi_dampak'),
         ];
@@ -243,83 +248,84 @@ public function hapus_jadwal($id_jadwal)
         return redirect()->to('auditor/resiko')->with('success', 'Data risiko berhasil dihapus');
     }
 
-     // Laporan Hasil Audir
-     public function view_tampilan_hasil()
-     {
-         $modelLaporan = new model_laporan_hasil();
-         $modelAudit = new model_auditauditor(); // pastikan model ini ada
-     
-         $data = [
-             'dataMb' => $modelLaporan->tampilLaporan(),
-             'dataAudit' => $modelAudit->findAll() // ambil semua kode_audit dari tabel audit
-         ];
-     
-         echo view('auditor/layout/auditor_header');
-         echo view('auditor/layout/auditor_nav');
-         echo view('auditor/Laporan_hasil/view_laporan_hasil', $data);
-         echo view('auditor/layout/auditor_footer');
-     }
-     
+
+    // Laporan Hasil Audir
+    public function view_tampilan_hasil()
+    {
+        $modelLaporan = new model_laporan_hasil();
+        $modelAudit = new model_auditauditor(); // pastikan model ini ada
+
+        $data = [
+            'dataMb' => $modelLaporan->tampilLaporan(),
+            'dataAudit' => $modelAudit->findAll() // ambil semua kode_audit dari tabel audit
+        ];
+
+        echo view('auditor/layout/auditor_header');
+        echo view('auditor/layout/auditor_nav');
+        echo view('auditor/Laporan_hasil/view_laporan_hasil', $data);
+        echo view('auditor/layout/auditor_footer');
+    }
+
     public function simpan_laporan()
-{
-    $model = new model_laporan_hasil();
-    $data = [
-        'kode_audit'         => $this->request->getPost('kode_audit'),
-        'temuan'             => $this->request->getPost('temuan'),
-        'rekomendasi'        => $this->request->getPost('rekomendasi'),
-        'rencana'            => $this->request->getPost('rencana'),
-        'target_realisasi'   => $this->request->getPost('target_realisasi'),
-        'rencana_pelaksana'  => $this->request->getPost('rencana_pelaksana'),
-        'tanggal'            => $this->request->getPost('tanggal'),
-        'nama_jabatan'       => $this->request->getPost('nama_jabatan'),
-    ];
+    {
+        $model = new model_laporan_hasil();
+        $data = [
+            'kode_audit' => $this->request->getPost('kode_audit'),
+            'temuan' => $this->request->getPost('temuan'),
+            'rekomendasi' => $this->request->getPost('rekomendasi'),
+            'rencana' => $this->request->getPost('rencana'),
+            'target_realisasi' => $this->request->getPost('target_realisasi'),
+            'rencana_pelaksana' => $this->request->getPost('rencana_pelaksana'),
+            'tanggal' => $this->request->getPost('tanggal'),
+            'nama_jabatan' => $this->request->getPost('nama_jabatan'),
+        ];
 
-    $model->insertData($data);
-    return redirect()->to(base_url('auditor/laporan_hasil'))->with('success', 'Data berhasil disimpan.');
-}
+        $model->insertData($data);
+        return redirect()->to(base_url('auditor/laporan_hasil'))->with('success', 'Data berhasil disimpan.');
+    }
 
-public function update_laporan()
-{
-    $model = new model_laporan_hasil();
-    $id = $this->request->getPost('id');
+    public function update_laporan()
+    {
+        $model = new model_laporan_hasil();
+        $id = $this->request->getPost('id');
 
-    $data = [
-        'kode_audit'         => $this->request->getPost('kode_audit'),
-        'temuan'             => $this->request->getPost('temuan'),
-        'rekomendasi'        => $this->request->getPost('rekomendasi'),
-        'rencana'            => $this->request->getPost('rencana'),
-        'target_realisasi'   => $this->request->getPost('target_realisasi'),
-        'rencana_pelaksana'  => $this->request->getPost('rencana_pelaksana'),
-        'tanggal'            => $this->request->getPost('tanggal'),
-        'nama_jabatan'       => $this->request->getPost('nama_jabatan'),
-    ];
+        $data = [
+            'kode_audit' => $this->request->getPost('kode_audit'),
+            'temuan' => $this->request->getPost('temuan'),
+            'rekomendasi' => $this->request->getPost('rekomendasi'),
+            'rencana' => $this->request->getPost('rencana'),
+            'target_realisasi' => $this->request->getPost('target_realisasi'),
+            'rencana_pelaksana' => $this->request->getPost('rencana_pelaksana'),
+            'tanggal' => $this->request->getPost('tanggal'),
+            'nama_jabatan' => $this->request->getPost('nama_jabatan'),
+        ];
 
-    $model->updateData($id, $data);
-    return redirect()->to(base_url('auditor/laporan_hasil'))->with('success', 'Data berhasil diupdate.');
-}
+        $model->updateData($id, $data);
+        return redirect()->to(base_url('auditor/laporan_hasil'))->with('success', 'Data berhasil diupdate.');
+    }
 
-public function hapus_laporan($id)
-{
-    $model = new model_laporan_hasil();
-    $model->deleteData($id);
-    return redirect()->to(base_url('auditor/laporan_hasil'))->with('success', 'Data berhasil dihapus.');
-}
+    public function hapus_laporan($id)
+    {
+        $model = new model_laporan_hasil();
+        $model->deleteData($id);
+        return redirect()->to(base_url('auditor/laporan_hasil'))->with('success', 'Data berhasil dihapus.');
+    }
 
-public function view_dokumen()
-{
-    $model = new model_dokumenauditor();  // Ensure the model is correctly loaded
+    public function view_dokumen()
+    {
+        $model = new model_dokumenauditor();  // Ensure the model is correctly loaded
 
-    // Paginate 20 records per page
-    $data['dataMb'] = $model->paginate(20, 'dokumen');  // This fetches data with pagination
-    $data['pager'] = $model->pager;  // Pagination helper
-    $data['currentPage'] = $model->pager->getCurrentPage('dokumen');  // Current page
+        // Paginate 20 records per page
+        $data['dataMb'] = $model->paginate(20, 'dokumen');  // This fetches data with pagination
+        $data['pager'] = $model->pager;  // Pagination helper
+        $data['currentPage'] = $model->pager->getCurrentPage('dokumen');  // Current page
 
-    // Load the necessary views and pass the data
-    echo view('auditor/layout/auditor_header');
-    echo view('auditor/layout/auditor_nav');
-    echo view('auditor/dokumen/view_dokumen', $data);  // Pass the data here
-    echo view('auditor/layout/auditor_footer');
-}
+        // Load the necessary views and pass the data
+        echo view('auditor/layout/auditor_header');
+        echo view('auditor/layout/auditor_nav');
+        echo view('auditor/dokumen/view_dokumen', $data);  // Pass the data here
+        echo view('auditor/layout/auditor_footer');
+    }
 
 
     public function view_aset()
@@ -336,6 +342,13 @@ public function view_dokumen()
         echo view('auditor/layout/auditor_footer');
     }
 
+    public function hapus_aset($id_aset)
+    {
+        $model = new model_asetauditor();
+        $model->deleteaset($id_aset);
+        return redirect()->to('auditor/aset')->with('success', 'Data Aset berhasil dihapus');
+    }
+
     // View Komponen
     public function view_komponenpenilaian()
     {
@@ -350,32 +363,32 @@ public function view_dokumen()
         echo view('auditor/layout/auditor_footer');
     }
     public function simpan_komponen()
-{
-    $model = new model_komponenauditor();
+    {
+        $model = new model_komponenauditor();
 
-    $data = $this->request->getPost();
-    $model->insertKomponen($data);
+        $data = $this->request->getPost();
+        $model->insertKomponen($data);
 
-    return redirect()->to(base_url('auditor/komponen_penilaian'));
-}
+        return redirect()->to(base_url('auditor/komponen_penilaian'));
+    }
 
-public function update_komponen()
-{
-    $model = new model_komponenauditor();
-    $id = $this->request->getPost('id_kontrol');
-    $data = $this->request->getPost();
-    unset($data['id_kontrol']); // jangan update primary key
+    public function update_komponen()
+    {
+        $model = new model_komponenauditor();
+        $id = $this->request->getPost('id_kontrol');
+        $data = $this->request->getPost();
+        unset($data['id_kontrol']); // jangan update primary key
 
-    $model->updateKomponen($id, $data);
-    return redirect()->to(base_url('auditor/komponen_penilaian'));
-}
+        $model->updateKomponen($id, $data);
+        return redirect()->to(base_url('auditor/komponen_penilaian'));
+    }
 
-public function hapus_komponen($id)
-{
-    $model = new model_komponenauditor();
-    $model->deleteKomponen($id);
-    return redirect()->to(base_url('auditor/komponen_penilaian'));
-}
+    public function hapus_komponen($id)
+    {
+        $model = new model_komponenauditor();
+        $model->deleteKomponen($id);
+        return redirect()->to(base_url('auditor/komponen_penilaian'));
+    }
 
 
     //view alokasi 
@@ -384,13 +397,13 @@ public function hapus_komponen($id)
         $model = new Model_alokasi();
         $data['alokasi'] = $model->tampilAlokasi();
 
-        $data['aset']     = (new model_asetauditor())->findAll();
-        $data['risiko']   = (new Model_risiko())->findAll();
-        $data['kontrol']  = (new model_komponenauditor())->findAll();
-        $data['dokumen']  = (new model_dokumenauditor())->findAll();
-        $data['jadwal']   = (new model_jadwalauditor())->findAll();
-        $data['auditor']  = (new model_auditor())->findAll();
-        $data['alat']     = (new Model_alatauditor())->findAll();
+        $data['aset'] = (new model_asetauditor())->findAll();
+        $data['risiko'] = (new Model_risiko())->findAll();
+        $data['kontrol'] = (new model_komponenauditor())->findAll();
+        $data['dokumen'] = (new model_dokumenauditor())->findAll();
+        $data['jadwal'] = (new model_jadwalauditor())->findAll();
+        $data['auditor'] = (new model_auditor())->findAll();
+        $data['alat'] = (new Model_alatauditor())->findAll();
 
         echo view('auditor/layout/auditor_header');
         echo view('auditor/layout/auditor_nav');
@@ -401,24 +414,26 @@ public function hapus_komponen($id)
     public function simpan_alokasi()
     {
         $model = new Model_alokasi();
-    
+
         // Data yang akan disimpan
         $data = [
-            'kode_alokasi'         => $this->request->getPost('kode_alokasi'),
-            'id_aset'            => $this->request->getPost('id_aset'),
-            'kode_risiko'          => $this->request->getPost('kode_risiko'),
-            'kode_kontrol'         => $this->request->getPost('kode_kontrol'),
-            'id_dokumen'           => $this->request->getPost('id_dokumen'),  // Simpan dokumen jika ada
-            'penilaian_level'      => $this->request->getPost('penilaian_level'),
-            'teknik_pengujian'     => $this->request->getPost('teknik_pengujian'),
-            'id_jadwal'            => $this->request->getPost('id_jadwal'),
-            'kode_alat'            => $this->request->getPost('kode_alat'),
+            'kode_alokasi' => $this->request->getPost('kode_alokasi'),
+            'id_aset' => $this->request->getPost('id_aset'),
+            'kode_risiko' => $this->request->getPost('kode_risiko'),
+            'kode_kontrol' => $this->request->getPost('kode_kontrol'),
+            'id_dokumen' => $this->request->getPost('id_dokumen'),  // Simpan dokumen jika ada
+            'penilaian_level' => $this->request->getPost('penilaian_level'),
+            'teknik_pengujian' => $this->request->getPost('teknik_pengujian'),
+            'id_jadwal' => $this->request->getPost('id_jadwal'),
+            'kode_alat' => $this->request->getPost('kode_alat'),
+            'audit' => $this->request->getPost('audit'),
+            'skor' => $this->request->getPost('skor'),
         ];
-    
+
         $model->insertData($data);
         return redirect()->to(base_url('auditor/alokasi'))->with('success', 'Data alokasi berhasil ditambahkan.');
     }
-    
+
     // Mengedit data alokasi berdasarkan ID
     public function edit_alokasi($kode_alokasi)
     {
@@ -429,13 +444,13 @@ public function hapus_komponen($id)
             return redirect()->to('auditor/view_alokasi')->with('error', 'Data tidak ditemukan');
         }
 
-        $data['aset']     = (new Model_aset())->findAll();
-        $data['risiko']   = (new Model_risiko())->findAll();
-        $data['kontrol']  = (new Model_komponenpenilaian())->findAll();
-        $data['dokumen']  = (new Model_dokumen())->findAll();
-        $data['jadwal']   = (new Model_jadwal())->findAll();
-        $data['auditor']  = (new Model_akun_auditor())->findAll();
-        $data['alat']     = (new Model_alat())->findAll();
+        $data['aset'] = (new model_asetauditor())->findAll();
+        $data['risiko'] = (new Model_risiko())->findAll();
+        $data['kontrol'] = (new model_komponenauditor())->findAll();
+        $data['dokumen'] = (new model_dokumenauditor())->findAll();
+        $data['jadwal'] = (new model_jadwalauditor())->findAll();
+        $data['auditor'] = (new model_auditor())->findAll();
+        $data['alat'] = (new Model_alatauditor())->findAll();
 
         echo view('auditor/layout/auditor_header');
         echo view('auditor/layout/auditor_nav');
@@ -445,24 +460,28 @@ public function hapus_komponen($id)
 
     // Memperbarui data alokasi
     public function update_alokasi()
-{
-    $model = new Model_alokasi();
-    $kode_alokasi = $this->request->getPost('kode_alokasi');
+    {
+        $model = new Model_alokasi();
+        $kode_alokasi = $this->request->getPost('kode_alokasi');
 
-    $data = [
-        'id_aset'            => $this->request->getPost('id_aset'),
-        'kode_risiko'          => $this->request->getPost('kode_risiko'),
-        'kode_kontrol'         => $this->request->getPost('kode_kontrol'),
-        'id_dokumen'           => $this->request->getPost('id_dokumen'),
-        'teknik_pengujian'     => $this->request->getPost('teknik_pengujian'),
-        'id_jadwal'            => $this->request->getPost('id_jadwal'),
-        'kode_alat'            => $this->request->getPost('kode_alat'),
-    ];
+        $data = [
+            'id_aset' => $this->request->getPost('id_aset'),
+            'kode_risiko' => $this->request->getPost('kode_risiko'),
+            'kode_kontrol' => $this->request->getPost('kode_kontrol'),
+            'id_dokumen' => $this->request->getPost('id_dokumen'),
+            'teknik_pengujian' => $this->request->getPost('teknik_pengujian'),
+            'id_jadwal' => $this->request->getPost('id_jadwal'),
+            'kode_alat' => $this->request->getPost('kode_alat'),
+            'penilaian_level' => $this->request->getPost('penilaian_level'), // ✅ Tambahkan
+            'dokumentasi' => $this->request->getPost('dokumentasi'),         // ✅ Jika field ini dipakai
+            'id_auditor' => $this->request->getPost('id_auditor'),
+            'audit' => $this->request->getPost('audit'),
+            'skor' => $this->request->getPost('skor'),         // ✅ Jika dipakai
+        ];
 
-    $model->updateData($kode_alokasi, $data);
-    return redirect()->to('auditor/alokasi')->with('success', 'Data alokasi berhasil diperbarui.');
-}
-
+        $model->updateData($kode_alokasi, $data);
+        return redirect()->to('auditor/alokasi')->with('success', 'Data alokasi berhasil diperbarui.');
+    }
 
     // Menghapus data alokasi
     public function hapus_alokasi($kode_alokasi)
@@ -472,4 +491,66 @@ public function hapus_komponen($id)
         return redirect()->to('auditor/alokasi')->with('success', 'Data alokasi berhasil dihapus.');
     }
 
+    //Temuannn
+    public function view_temuan()
+    {
+        $model = new model_temuan();
+        $data['temuan'] = $model->findAll();
+
+        echo view('auditor/layout/auditor_header');
+        echo view('auditor/layout/auditor_nav');
+        echo view('auditor/hasil_temuan/temuan', $data);
+        echo view('auditor/layout/auditor_footer');
+    }
+
+    // Menyimpan data temuan baru
+    public function simpan_temuan()
+    {
+        $model = new model_temuan();
+        $data = [
+            'kode_audit' => $this->request->getPost('kode_audit'),
+            'temuan' => $this->request->getPost('temuan'),
+            'rekomendasi' => $this->request->getPost('rekomendasi'),
+        ];
+        $model->insert($data);
+        return redirect()->to('auditor/hasil_temuan')->with('success', 'Data temuan berhasil ditambahkan.');
+    }
+
+    // Menampilkan form edit temuan
+    public function edit_temuan($id_temuan)
+    {
+        $model = new model_temuan();
+        $data['temuan'] = $model->find($id_temuan);
+
+        if (!$data['temuan']) {
+            return redirect()->to('auditor/hasil_temuan')->with('error', 'Data tidak ditemukan');
+        }
+
+        echo view('auditor/layout/auditor_header');
+        echo view('auditor/layout/auditor_nav');
+        echo view('auditor/hasil_temuan/edit', $data);
+        echo view('auditor/layout/auditor_footer');
+    }
+
+    // Memperbarui data temuan
+    public function update_temuan()
+    {
+        $model = new model_temuan();
+        $id = $this->request->getPost('id_temuan');
+        $data = [
+            'kode_audit' => $this->request->getPost('kode_audit'),
+            'temuan' => $this->request->getPost('temuan'),
+            'rekomendasi' => $this->request->getPost('rekomendasi'),
+        ];
+        $model->update($id, $data);
+        return redirect()->to('auditor/hasil_temuan')->with('success', 'Data temuan berhasil diperbarui.');
+    }
+
+    // Menghapus data temuan
+    public function hapus_temuan($id_temuan)
+    {
+        $model = new model_temuan();
+        $model->delete($id_temuan);
+        return redirect()->to('auditor/hasil_temuan')->with('success', 'Data temuan berhasil dihapus.');
+    }
 }

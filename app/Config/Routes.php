@@ -34,7 +34,7 @@ $routes->get('superadmin/users/delete/(:num)', 'admin_controller::delete_users/$
 
 
 // ====================
-// AUDITEE (Fito)
+// AUDITEE (Faiza)
 // ====================
 // Auth
 $routes->get('login', 'Login::form_login');
@@ -73,7 +73,7 @@ $routes->post('auditee/update_alat', 'auditee::update_alat');
 $routes->get('auditee/delete_alat/(:num)', 'auditee::delete_alat/$1');
 
 // ====================
-// AUDITOR (Faiza Fina)
+// AUDITOR (Fina)
 // ====================
 $routes->get('auditor', 'auditor::view_auditor');
 $routes->get('auditor/alat', 'auditor::view_alat');
@@ -101,6 +101,7 @@ $routes->post('auditor/update_laporan', 'Auditor::update_laporan');
 $routes->get('auditor/hapus_laporan/(:num)', 'Auditor::hapus_laporan/$1');
 
 $routes->get('auditor/aset', 'auditor::view_aset');
+$routes->get('auditor/aset/hapus/(:num)', 'auditor::hapus_aset/$1');
 
 // Komponen
 $routes->get('auditor/komponen_penilaian', 'auditor::view_komponenpenilaian');
@@ -128,3 +129,10 @@ $routes->post('auditor/alokasi/update', 'Auditor::update_alokasi'); // Untuk upd
 
 // Rute untuk menghapus data alokasi
 $routes->get('auditor/alokasi/hapus/(:segment)', 'Auditor::hapus_alokasi/$1'); // Untuk hapus
+
+
+// Routes untuk Temuan
+$routes->get('auditor/hasil_temuan', 'Auditor::view_temuan');
+$routes->post('auditor/hasil_temuan/tambah', 'Auditor::simpan_temuan');
+$routes->post('auditor/hasil_temuan/edit', 'Auditor::update_temuan');
+$routes->get('auditor/hasil_temuan/hapus/(:segment)', 'Auditor::hapus_temuan/$1');

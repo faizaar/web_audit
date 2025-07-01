@@ -38,4 +38,37 @@
             </div>
         </div>
     </div>
+    <div class="card shadow-sm border-0">
+        <div class="card-header text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Hasil Temuan</h5>
+        </div>
+        <div class="card-body px-3">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle mb-0">
+                    <thead class="table-light text-center">
+                        <tr>
+                            <th>Tahapan Audit</th>
+                            <th>Temuan</th>
+                            <th>Rekomendasi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (empty($hasil_temuan)): ?>
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">Belum ada hasil penilaian.</td>
+                            </tr>
+                        <?php else: ?>
+                            <?php foreach ($hasil_temuan as $row): ?>
+                                <tr>
+                                    <td><?= esc($row['kode_audit']) ?></td>
+                                    <td><?= esc($row['temuan']) ?></td>
+                                    <td><?= esc($row['rekomendasi']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

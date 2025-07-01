@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Models;
 use CodeIgniter\Model;
 
@@ -14,10 +14,15 @@ class Model_alokasi extends Model
         'kode_kontrol',
         'id_dokumen',
         'teknik_pengujian',
+        'dokumentasi',
         'id_jadwal',
+        'id_auditor',
         'kode_alat',
         'penilaian_level',
+        'audit',
+        'skor',
     ];
+
 
     public function __construct()
     {
